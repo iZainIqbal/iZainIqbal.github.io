@@ -4,6 +4,7 @@ import Base from "../../layouts/Base.astro";
 import ProjectCard from "../../components/ProjectCard.astro";
 import { LAYERS } from "../../content.config";
 import { LAYER_LABEL, byOrder } from "../../lib/format";
+import { SKILLS, skillKeys } from "../../lib/skills";
 
 const all = (await getCollection("projects")).sort(byOrder);
 const groups = [
@@ -33,7 +34,12 @@ const usedLayers = LAYERS.filter((l) => all.some((p) => p.data.layers.includes(l
         ))
       }
     </div>
+    <p class="mt-4 text-sm text-ink-2" data-skill-note hidden>
+      <span data-skill-text></span>
+      <button type="button" class="ml-2 font-semibold text-accent underline underline-offset-2" data-skill-clear>Show all</button>
+    </p>
     <p class="sr-only" aria-live="polite" data-filter-status></p>
+    <script type="application/json" data-skill-labels set:html={JSON.stringify(Object.fromEntries(SKILLS.map((s) => [s.key, s.label])))} />
   </section>
 
   {
@@ -48,7 +54,7 @@ const usedLayers = LAYERS.filter((l) => all.some((p) => p.data.layers.includes(l
                 </summary>
                 <div class="mt-5 grid gap-6 lg:grid-cols-2">
                   {g.items.map((p) => (
-                    <div data-layers={p.data.layers.join(" ")}>
+                    <div data-layers={p.data.layers.join(" ")} data-skills={skillKeys(p).join(" ")}>
                       <ProjectCard project={p} />
                     </div>
                   ))}
@@ -59,7 +65,7 @@ const usedLayers = LAYERS.filter((l) => all.some((p) => p.data.layers.includes(l
                 <h2 class="mb-5 text-xl font-bold">{g.title}</h2>
                 <div class="grid gap-6 lg:grid-cols-2">
                   {g.items.map((p) => (
-                    <div data-layers={p.data.layers.join(" ")}>
+                    <div data-layers={p.data.layers.join(" ")} data-skills={skillKeys(p).join(" ")}>
                       <ProjectCard project={p} />
                     </div>
                   ))}
@@ -84,29 +90,58 @@ const usedLayers = LAYERS.filter((l) => all.some((p) => p.data.layers.includes(l
   // Progressive enhancement: without JS every project is simply visible.
   const bar = document.querySelector<HTMLElement>("[data-filters]");
   const status = document.querySelector<HTMLElement>("[data-filter-status]");
+  const note = document.querySelector<HTMLElement>("[data-skill-note]");
+  const noteText = document.querySelector<HTMLElement>("[data-skill-text]");
+  const labels: Record<string, string> = JSON.parse(document.querySelector("[data-skill-labels]")?.textContent ?? "{}");
   if (bar) {
     bar.hidden = false;
     const buttons = [...bar.querySelectorAll<HTMLButtonElement>("button")];
     const cards = [...document.querySelectorAll<HTMLElement>("[data-layers]")];
-    bar.addEventListener("click", (ev) => {
-      const btn = (ev.target as HTMLElement).closest("button");
-      if (!btn) return;
-      const layer = btn.dataset.layer ?? "all";
-      buttons.forEach((b) => b.setAttribute("aria-pressed", String(b === btn)));
+    const has = (c: HTMLElement, attr: "layers" | "skills", key: string) => (c.dataset[attr] ?? "").split(" ").includes(key);
+
+    // Show only the matching cards and return how many are visible.
+    const show = (match: (c: HTMLElement) => boolean, filtered: boolean) => {
       let shown = 0;
       cards.forEach((c) => {
-        const match = layer === "all" || (c.dataset.layers ?? "").split(" ").includes(layer);
-        c.hidden = !match;
-        if (match) shown++;
+        c.hidden = !match(c);
+        if (!c.hidden) shown++;
       });
       document.querySelectorAll<HTMLElement>("[data-group]").forEach((g) => {
         g.hidden = !g.querySelector("[data-layers]:not([hidden])");
       });
       // A filtered view should never hide matches inside the collapsed group.
-      document.querySelectorAll<HTMLDetailsElement>("[data-early]").forEach((d) => {
-        if (layer !== "all") d.open = true;
-      });
+      if (filtered) document.querySelectorAll<HTMLDetailsElement>("[data-early]").forEach((d) => (d.open = true));
       if (status) status.textContent = `${shown} projects shown`;
+      return shown;
+    };
+
+    const pressLayer = (layer: string) => {
+      buttons.forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.layer === layer)));
+      if (note) note.hidden = true;
+      show((c) => layer === "all" || has(c, "layers", layer), layer !== "all");
+    };
+
+    const clearSkill = (layer: string) => {
+      history.replaceState(null, "", location.pathname);
+      pressLayer(layer);
+    };
+    bar.addEventListener("click", (ev) => {
+      const btn = (ev.target as HTMLElement).closest("button");
+      if (btn) clearSkill(btn.dataset.layer ?? "all");
     });
+    document.querySelector("[data-skill-clear]")?.addEventListener("click", () => clearSkill("all"));
+
+    // Skill links from the home page arrive as /work/?skill=react.
+    const skill = new URLSearchParams(location.search).get("skill");
+    if (skill && buttons.some((b) => b.dataset.layer === skill)) {
+      pressLayer(skill);
+    } else if (skill && labels[skill]) {
+      buttons.forEach((b) => b.setAttribute("aria-pressed", "false"));
+      const shown = show((c) => has(c, "skills", skill), true);
+      if (note && noteText) {
+        noteText.textContent = `${shown} ${shown === 1 ? "project uses" : "projects use"} ${labels[skill]}.`;
+        note.hidden = false;
+      }
+    }
   }
 </script>

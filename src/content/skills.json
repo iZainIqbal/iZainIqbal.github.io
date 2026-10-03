@@ -5,7 +5,7 @@
     "items": [
       { "name": "React + TypeScript", "evidence": ["field-service-marketplace"] },
       { "name": "Vite, Tailwind CSS", "evidence": ["field-service-marketplace"] },
-      { "name": "Technical SEO (pre-rendering, JSON-LD, hreflang)", "evidence": ["field-service-marketplace", "africa-travel-hub", "wanyumba"] },
+      { "name": "Technical SEO (pre-rendering, JSON-LD, hreflang)", "evidence": ["field-service-marketplace", "travel-marketplace", "property-marketplace"] },
       { "name": "End-to-end tests (Playwright)", "evidence": ["field-service-marketplace"] }
     ]
   },

@@ -6,12 +6,10 @@ export const home = {
     "Zain Iqbal, full-stack engineer with 2+ years building web platforms, mobile apps and AI features with React, FastAPI and Flutter.",
   eyebrow: "Full-stack engineer · 2+ years",
   title: "I build web platforms, mobile apps and AI features for production.",
-  lede: "React and FastAPI on the web, Flutter on mobile. I work on marketplaces, fitness and nutrition apps, e-commerce and on-device AI",
+  lede: "React and FastAPI on the web, Flutter on mobile. I work on marketplaces, fitness and nutrition apps, e-commerce and on-device AI.",
   summaryTitle: "Summary",
   summary:
-    "Full-stack engineer at Metaviz AI. Since December 2025 I've worked mainly on a Swiss field-service marketplace: its React web app, FastAPI backend, payments, passwordless sign-in, AI assistant and technical SEO. Before that I built Flutter apps and Strapi backends for fitness, nutrition, e-commerce and wellness clients.",
-  specialities: ["Web platforms", "Backends & APIs", "Mobile apps", "Payments & sign-in", "AI features", "Technical SEO"],
-  stack: "React · TypeScript · FastAPI · Python · Flutter · PostgreSQL · Strapi · Firebase",
+    "Full-stack engineer at Metaviz AI. I started on Flutter apps and Strapi backends for fitness, nutrition, e-commerce and wellness clients. Since December 2025 I've worked mainly on a Swiss field-service marketplace: its React web app, FastAPI backend, payments, passwordless sign-in, AI assistant and technical SEO. Since September 2026 I've also done frontend work on a travel marketplace and a property marketplace, making their pages lighter and easier for Google to read.",
   contactTitle: "Hiring for a web, backend or Flutter role?",
   contactText: "Email is the fastest way to reach me.",
 };
@@ -22,7 +20,7 @@ export const about = {
   title: "Full-stack engineer with a mobile background",
   paragraphs: [
     "I started with Flutter in 2023 and built mobile apps through an internship, university projects and my own app on Google Play.",
-    "At Metaviz AI I built Flutter apps and Strapi backends for fitness, nutrition, e-commerce and wellness clients. Since December 2025 most of my work has been on a Swiss field-service marketplace, where I moved into React and FastAPI and work on payments, passwordless sign-in, the AI assistant and technical SEO.",
+    "At Metaviz AI I built Flutter apps and Strapi backends for fitness, nutrition, e-commerce and wellness clients. Since December 2025 most of my work has been on a Swiss field-service marketplace, where I moved into React and FastAPI and work on payments, passwordless sign-in, the AI assistant and technical SEO. Since September 2026 I've also done frontend work on a travel marketplace and a property marketplace, focused on SEO and page speed.",
     "Alongside client work I build my own tools, like an AI assistant that runs fully on the phone and a tested Python data pipeline.",
   ],
 };
@@ -72,5 +70,5 @@ export const hire = {
 
 export const cv = {
   summary:
-    "Full-stack engineer with 2+ years of experience building web platforms, mobile apps and AI features with React, TypeScript, FastAPI, Python and Flutter. At Metaviz AI, working mainly on a Swiss field-service marketplace: React web app, FastAPI backend, payments (TWINT, subscriptions), passwordless sign-in, AI assistant integration and technical SEO. Earlier Flutter and Strapi work for fitness, nutrition, e-commerce and wellness clients.",
+    "Full-stack engineer with 2+ years of experience building web platforms, mobile apps and AI features with React, TypeScript, FastAPI, Python and Flutter. At Metaviz AI, working mainly on a Swiss field-service marketplace: React web app, FastAPI backend, payments (TWINT, subscriptions), passwordless sign-in, AI assistant integration and technical SEO. Since September 2026 also frontend SEO and performance work on a travel marketplace and a property marketplace. Earlier Flutter and Strapi work for fitness, nutrition, e-commerce and wellness clients.",
 };

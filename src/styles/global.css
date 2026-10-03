@@ -176,6 +176,41 @@
     background: var(--surface);
     white-space: nowrap;
   }
+  /* Home page skills: each links to its proof and shows a project count on hover. */
+  .skill-link {
+    position: relative;
+    gap: 0.4rem;
+    text-decoration: none;
+    transition:
+      color 150ms,
+      border-color 150ms;
+  }
+  .skill-link:hover,
+  .skill-link:focus-visible {
+    color: var(--accent);
+    border-color: var(--accent);
+  }
+  .skill-tip {
+    position: absolute;
+    bottom: calc(100% + 0.4rem);
+    left: 50%;
+    translate: -50% 4px;
+    padding: 0.15rem 0.5rem;
+    border-radius: 0.4rem;
+    background: var(--ink);
+    color: var(--bg);
+    font-size: 0.72rem;
+    opacity: 0;
+    pointer-events: none;
+    transition:
+      opacity 150ms,
+      translate 150ms;
+  }
+  .skill-link:hover .skill-tip,
+  .skill-link:focus-visible .skill-tip {
+    opacity: 1;
+    translate: -50% 0;
+  }
   .card {
     background: var(--surface);
     border: 1px solid var(--line);

@@ -6,8 +6,8 @@
     "place": "Remote",
     "start": "2025-08",
     "end": "present",
-    "summary": "Started on Flutter apps and Strapi backends for fitness, nutrition, e-commerce and wellness clients. Since December 2025 I've worked mainly on a Swiss field-service marketplace: its React web app, FastAPI backend, payments, passwordless sign-in and technical SEO.",
-    "projects": ["field-service-marketplace", "africa-travel-hub", "wanyumba", "grocery-delivery-app", "wellness-app-backend", "nutrition-tracking-app", "ecommerce-app", "ai-fitness-app"]
+    "summary": "Started on Flutter apps and Strapi backends for fitness, nutrition, e-commerce and wellness clients. Since December 2025 I've worked mainly on a Swiss field-service marketplace: its React web app, FastAPI backend, payments, passwordless sign-in and technical SEO. Since September 2026 I've also done frontend, SEO and performance work on a travel marketplace and a property marketplace.",
+    "projects": ["field-service-marketplace", "travel-marketplace", "property-marketplace", "grocery-delivery-app", "wellness-app-backend", "nutrition-tracking-app", "ecommerce-app", "ai-fitness-app"]
   },
   {
     "id": "university",

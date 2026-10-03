@@ -37,6 +37,32 @@ export function byOrder(a: CollectionEntry<"projects">, b: CollectionEntry<"proj
   return a.data.order - b.data.order || recency(b).localeCompare(recency(a));
 }
 
+// A measured change in project text, like "36,675 → 27,924" or "727 KB → 553 KB".
+const CHANGE = /(\d[\d,]*(?:\.\d+)?)(\s*[A-Za-z%]*\s*→\s*)(\d[\d,]*(?:\.\d+)?)/g;
+const toNumber = (s: string) => Number(s.replaceAll(",", ""));
+
+export interface Change {
+  text: string;
+  from: number;
+  to: number;
+  decimals: number;
+}
+
+// Splits text so the number after each arrow can count from the number before
+// it. Everything else stays plain text.
+export function splitChanges(text: string): (string | Change)[] {
+  const parts: (string | Change)[] = [];
+  let last = 0;
+  for (const m of text.matchAll(CHANGE)) {
+    const [whole, before, middle, after] = m;
+    parts.push(text.slice(last, m.index) + before + middle);
+    parts.push({ text: after, from: toNumber(before), to: toNumber(after), decimals: after.split(".")[1]?.length ?? 0 });
+    last = m.index + whole.length;
+  }
+  parts.push(text.slice(last));
+  return parts.filter((p) => p !== "");
+}
+
 // Skill groups in reading order: what employers ask about first.
 const SKILL_ORDER = ["web", "backend", "mobile", "payments", "ai", "data"];
 export function sortSkills<T extends { id: string }>(groups: T[]): T[] {

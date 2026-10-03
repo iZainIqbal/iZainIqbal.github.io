@@ -76,6 +76,41 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
         );
         items.forEach((el) => io.observe(el));
       }
+
+      // Measured changes ("36,675 → 27,924") count from the old value to the new
+      // one when they first come into view. With reduced motion they stay static.
+      const counters = document.querySelectorAll<HTMLElement>("[data-count-to]");
+      if (counters.length && document.documentElement.classList.contains("js-motion") && "IntersectionObserver" in window) {
+        const format = (el: HTMLElement, v: number) => {
+          const d = Number(el.dataset.countDecimals);
+          el.textContent = v.toLocaleString("en-US", { minimumFractionDigits: d, maximumFractionDigits: d });
+        };
+        const run = (el: HTMLElement) => {
+          const from = Number(el.dataset.countFrom);
+          const to = Number(el.dataset.countTo);
+          const start = performance.now();
+          const step = (now: number) => {
+            const t = Math.min(1, (now - start) / 1100);
+            format(el, from + (to - from) * (1 - (1 - t) ** 3));
+            if (t < 1) requestAnimationFrame(step);
+          };
+          requestAnimationFrame(step);
+        };
+        const countIo = new IntersectionObserver(
+          (entries) =>
+            entries
+              .filter((e) => e.isIntersecting)
+              .forEach((e) => {
+                run(e.target as HTMLElement);
+                countIo.unobserve(e.target);
+              }),
+          { threshold: 1 },
+        );
+        counters.forEach((el) => {
+          format(el, Number(el.dataset.countFrom));
+          countIo.observe(el);
+        });
+      }
     </script>
   </body>
 </html>

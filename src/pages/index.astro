@@ -8,9 +8,12 @@ import portrait from "../assets/profilepicture.webp";
 import { profile } from "../data/profile";
 import { home } from "../data/copy";
 import { byOrder } from "../lib/format";
+import { SPECIALITIES, STACK, type Skill } from "../lib/skills";
+import SkillLink from "../components/SkillLink.astro";
 
 const all = (await getCollection("projects")).sort(byOrder);
 const featured = all.filter((p) => p.data.featured);
+const countOf = (s: Skill) => all.filter(s.matches).length;
 ---
 
 <Base title={profile.name} description={home.metaDescription}>
@@ -48,13 +51,16 @@ const featured = all.filter((p) => p.data.featured);
       <div>
         <h2 id="sum-h" class="text-2xl font-bold">{home.summaryTitle}</h2>
         <p class="mt-3 max-w-[64ch] text-ink-2">{home.summary}</p>
-        <p class="mt-4 font-mono text-sm text-muted">{home.stack}</p>
+        <ul class="mt-5 flex flex-wrap gap-2" aria-label="Tech stack">
+          {STACK.map((s) => <li><SkillLink skill={s.key} label={s.label} count={countOf(s)} /></li>)}
+        </ul>
       </div>
       <div>
         <h3 class="text-sm font-semibold">Specialities</h3>
         <ul class="mt-3 flex flex-wrap gap-2">
-          {home.specialities.map((s) => <li class="chip">{s}</li>)}
+          {SPECIALITIES.map((s) => <li><SkillLink skill={s.key} label={s.label} count={countOf(s)} /></li>)}
         </ul>
+        <p class="mt-4 text-xs text-muted">Click any skill to see the projects behind it.</p>
       </div>
     </div>
   </section>

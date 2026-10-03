@@ -1,0 +1,30 @@
+---
+import { splitChanges } from "../lib/format";
+
+interface Props {
+  text: string;
+}
+
+// The final number is in the HTML; Base.astro animates it only when motion is allowed.
+// Screen readers get a static copy, so they never read a number mid-count.
+const parts = splitChanges(Astro.props.text);
+---
+
+{parts.map((p) =>
+  typeof p === "string" ? (
+    p
+  ) : (
+    <>
+      <span
+        class="tabular-nums"
+        aria-hidden="true"
+        data-count-from={p.from}
+        data-count-to={p.to}
+        data-count-decimals={p.decimals}
+      >
+        {p.text}
+      </span>
+      <span class="sr-only">{p.text}</span>
+    </>
+  ),
+)}

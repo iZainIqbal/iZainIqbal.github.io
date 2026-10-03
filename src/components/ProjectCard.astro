@@ -2,6 +2,7 @@
 import type { CollectionEntry } from "astro:content";
 import { Image } from "astro:assets";
 import { LAYER_LABEL, formatPeriod } from "../lib/format";
+import CountText from "./CountText.astro";
 
 interface Props {
   project: CollectionEntry<"projects">;
@@ -71,7 +72,7 @@ const phoneShots = p.screens.slice(0, 3);
               p.myWork.slice(0, compact ? 2 : 3).map((w) => (
                 <li class="flex gap-2 text-ink-2">
                   <span aria-hidden="true" class="mt-2.5 size-1.5 shrink-0 rounded-full bg-accent" />
-                  <span>{w}</span>
+                  <span><CountText text={w} /></span>
                 </li>
               ))
             }

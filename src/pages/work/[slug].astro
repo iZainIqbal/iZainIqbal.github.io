@@ -3,6 +3,7 @@ import { getCollection, render, type CollectionEntry } from "astro:content";
 import { Image } from "astro:assets";
 import Base from "../../layouts/Base.astro";
 import { LAYER_LABEL, byOrder, formatPeriod } from "../../lib/format";
+import CountText from "../../components/CountText.astro";
 
 export async function getStaticPaths() {
   const all = (await getCollection("projects")).sort(byOrder);
@@ -46,6 +47,7 @@ const KIND_LABEL = {
             sizes="(min-width: 1152px) 70rem, 100vw"
             loading="eager"
             class="mt-8 w-full rounded-2xl border border-line"
+            data-zoomable
           />
         )
       }
@@ -61,7 +63,7 @@ const KIND_LABEL = {
               p.myWork.map((w) => (
                 <li class="flex gap-2.5 text-ink-2">
                   <span aria-hidden="true" class="mt-2.5 size-1.5 shrink-0 rounded-full bg-accent" />
-                  <span>{w}</span>
+                  <span><CountText text={w} /></span>
                 </li>
               ))
             }
@@ -79,7 +81,7 @@ const KIND_LABEL = {
               <>
                 <h3 class="mt-5 text-sm font-semibold">Results</h3>
                 <ul class="mt-1 grid gap-1 text-ink-2">
-                  {p.results.map((r) => <li>{r}</li>)}
+                  {p.results.map((r) => <li><CountText text={r} /></li>)}
                 </ul>
               </>
             )
@@ -109,6 +111,7 @@ const KIND_LABEL = {
                       sizes="13rem"
                       loading="lazy"
                       class="w-full rounded-xl border border-line bg-surface-2"
+                      data-zoomable
                     />
                   </li>
                 ))}
@@ -168,7 +171,46 @@ const KIND_LABEL = {
       </a>
     </nav>
   </article>
+
+  <dialog class="zoom" aria-label="Enlarged screenshot" data-zoom-dialog>
+    <img alt="" data-zoom-img />
+    <p>Click anywhere or press Esc to close</p>
+  </dialog>
 </Base>
+
+<script>
+  // Click a screenshot to see it full size; any click or Esc closes it.
+  // Without JS (or without <dialog> support) images simply stay as they are.
+  const dialog = document.querySelector<HTMLDialogElement>("[data-zoom-dialog]");
+  const big = dialog?.querySelector<HTMLImageElement>("[data-zoom-img]");
+
+  // Astro serves several widths; the zoom should use the largest one.
+  const largestSrc = (img: HTMLImageElement) => {
+    const candidates = img.srcset
+      .split(",")
+      .map((c) => c.trim().split(/\s+/))
+      .filter(([, w]) => w?.endsWith("w"))
+      .sort((a, b) => parseInt(b[1]) - parseInt(a[1]));
+    return candidates[0]?.[0] ?? img.currentSrc ?? img.src;
+  };
+
+  if (dialog && big && typeof dialog.showModal === "function") {
+    document.querySelectorAll<HTMLImageElement>("img[data-zoomable], .case-body img").forEach((img) => {
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "zoom-trigger";
+      btn.setAttribute("aria-label", `Enlarge: ${img.alt || "screenshot"}`);
+      img.replaceWith(btn);
+      btn.append(img);
+      btn.addEventListener("click", () => {
+        big.src = largestSrc(img);
+        big.alt = img.alt;
+        dialog.showModal();
+      });
+    });
+    dialog.addEventListener("click", () => dialog.close());
+  }
+</script>
 
 <style is:global>
   .case-body h2 {
@@ -211,5 +253,38 @@ const KIND_LABEL = {
     height: auto;
     border: 1px solid var(--line);
     border-radius: 0.75rem;
+  }
+  .zoom-trigger {
+    display: block;
+    width: 100%;
+    padding: 0;
+    border: 0;
+    background: none;
+    cursor: zoom-in;
+    border-radius: 0.75rem;
+  }
+  .zoom {
+    max-width: min(96vw, 90rem);
+    max-height: 96vh;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    cursor: zoom-out;
+  }
+  .zoom::backdrop {
+    background: rgb(0 0 0 / 0.82);
+  }
+  .zoom img {
+    display: block;
+    max-width: 100%;
+    max-height: 90vh;
+    margin-inline: auto;
+    border-radius: 0.75rem;
+  }
+  .zoom p {
+    margin-top: 0.5rem;
+    text-align: center;
+    font-size: 0.8rem;
+    color: #fff;
   }
 </style>
