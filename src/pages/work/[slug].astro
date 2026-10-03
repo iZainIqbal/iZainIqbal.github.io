@@ -1,0 +1,215 @@
+---
+import { getCollection, render, type CollectionEntry } from "astro:content";
+import { Image } from "astro:assets";
+import Base from "../../layouts/Base.astro";
+import { LAYER_LABEL, byOrder, formatPeriod } from "../../lib/format";
+
+export async function getStaticPaths() {
+  const all = (await getCollection("projects")).sort(byOrder);
+  return all.map((project, i) => ({
+    params: { slug: project.id },
+    props: { project, next: all[(i + 1) % all.length] },
+  }));
+}
+
+interface Props {
+  project: CollectionEntry<"projects">;
+  next: CollectionEntry<"projects">;
+}
+
+const { project, next } = Astro.props;
+const p = project.data;
+const { Content } = await render(project);
+const hasBody = Boolean(project.body?.trim());
+const KIND_LABEL = {
+  client: "Client project",
+  personal: "Personal project",
+  course: "Course project",
+  internship: "Internship",
+  academic: "University",
+};
+---
+
+<Base title={p.title} description={`${p.summary} My role: ${p.role}.`}>
+  <article>
+    <header class="container-page pt-12 pb-8 sm:pt-16">
+      <a href="/work/" class="text-sm text-muted hover:text-ink">← All work</a>
+      <p class="eyebrow mt-6">{KIND_LABEL[p.kind]}{p.org ? ` · ${p.org}` : ""}</p>
+      <h1 class="mt-2 text-4xl font-bold sm:text-5xl">{p.title}</h1>
+      <p class="mt-3 max-w-[60ch] text-lg text-ink-2">{p.summary}</p>
+      {
+        p.cover && (
+          <Image
+            src={p.cover}
+            alt={`${p.title} screenshot`}
+            widths={[640, 1024, 1440]}
+            sizes="(min-width: 1152px) 70rem, 100vw"
+            loading="eager"
+            class="mt-8 w-full rounded-2xl border border-line"
+          />
+        )
+      }
+    </header>
+
+    <div class="container-page grid gap-10 lg:grid-cols-[1fr_20rem]">
+      <div class="min-w-0">
+        <!-- The answer a reviewer came for, before any narrative. -->
+        <section aria-labelledby="mine" class="card p-5 sm:p-6">
+          <h2 id="mine" class="text-xl font-bold">What I built</h2>
+          <ul class="mt-3 grid gap-2">
+            {
+              p.myWork.map((w) => (
+                <li class="flex gap-2.5 text-ink-2">
+                  <span aria-hidden="true" class="mt-2.5 size-1.5 shrink-0 rounded-full bg-accent" />
+                  <span>{w}</span>
+                </li>
+              ))
+            }
+          </ul>
+          {
+            p.teamWork && (
+              <>
+                <h3 class="mt-5 text-sm font-semibold">What the team built</h3>
+                <p class="mt-1 text-muted">{p.teamWork}</p>
+              </>
+            )
+          }
+          {
+            p.results.length > 0 && (
+              <>
+                <h3 class="mt-5 text-sm font-semibold">Results</h3>
+                <ul class="mt-1 grid gap-1 text-ink-2">
+                  {p.results.map((r) => <li>{r}</li>)}
+                </ul>
+              </>
+            )
+          }
+        </section>
+
+        {
+          hasBody && (
+            <div class="case-body prose-page mt-10">
+              <Content />
+            </div>
+          )
+        }
+
+        {
+          p.screens.length > 0 && (
+            <section class="mt-12" aria-labelledby="screens-h">
+              <h2 id="screens-h" class="text-xl font-bold">Screens</h2>
+              <p class="mt-1 text-sm text-muted">Scroll sideways to see more.</p>
+              <ul class="mt-4 flex snap-x snap-mandatory gap-4 overflow-x-auto pb-4" tabindex="0" aria-label="Screenshots">
+                {p.screens.map((s, i) => (
+                  <li class="w-44 shrink-0 snap-start sm:w-52">
+                    <Image
+                      src={s}
+                      alt={`${p.title} screen ${i + 1}`}
+                      widths={[208, 416]}
+                      sizes="13rem"
+                      loading="lazy"
+                      class="w-full rounded-xl border border-line bg-surface-2"
+                    />
+                  </li>
+                ))}
+              </ul>
+            </section>
+          )
+        }
+      </div>
+
+      <aside class="grid content-start gap-4 lg:sticky lg:top-24">
+        <dl class="card grid gap-4 p-5 text-sm">
+          <div>
+            <dt class="font-semibold">Role</dt>
+            <dd class="text-ink-2">{p.role}</dd>
+          </div>
+          {
+            p.team && (
+              <div>
+                <dt class="font-semibold">Team</dt>
+                <dd class="text-ink-2">{p.team}</dd>
+              </div>
+            )
+          }
+          <div>
+            <dt class="font-semibold">When</dt>
+            <dd class="text-ink-2">{formatPeriod(p.start, p.end)}</dd>
+          </div>
+          <div>
+            <dt class="font-semibold">Layers I built</dt>
+            <dd class="mt-1 flex flex-wrap gap-1.5">{p.layers.map((l) => <span class="chip">{LAYER_LABEL[l]}</span>)}</dd>
+          </div>
+          <div>
+            <dt class="font-semibold">Stack</dt>
+            <dd class="text-ink-2">{p.stack.join(" · ")}</dd>
+          </div>
+        </dl>
+        {
+          p.links.length > 0 && (
+            <ul class="card grid gap-2 p-5 text-sm" aria-label="Links">
+              {p.links.map((l) => (
+                <li>
+                  <a href={l.url} rel={l.url.startsWith("/") ? undefined : "noopener"} class="font-semibold text-accent">
+                    {l.label} <span aria-hidden="true">↗</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          )
+        }
+      </aside>
+    </div>
+
+    <nav class="container-page mt-16" aria-label="Next project">
+      <a href={`/work/${next.id}/`} class="card block p-5 no-underline hover:border-ink-2">
+        <span class="eyebrow">Next project</span>
+        <span class="mt-1 block text-lg font-semibold text-ink">{next.data.title} →</span>
+      </a>
+    </nav>
+  </article>
+</Base>
+
+<style is:global>
+  .case-body h2 {
+    font-size: 1.35rem;
+    font-weight: 700;
+    margin-top: 2.25rem;
+  }
+  .case-body h3 {
+    font-size: 1.05rem;
+    font-weight: 650;
+    margin-top: 1.5rem;
+  }
+  .case-body p,
+  .case-body ul,
+  .case-body ol {
+    margin-top: 0.75rem;
+    color: var(--ink-2);
+  }
+  .case-body ul {
+    list-style: disc;
+    padding-left: 1.25rem;
+  }
+  .case-body ol {
+    list-style: decimal;
+    padding-left: 1.25rem;
+  }
+  .case-body li + li {
+    margin-top: 0.35rem;
+  }
+  .case-body a {
+    color: var(--accent);
+    text-decoration: underline;
+  }
+  .case-body strong {
+    color: var(--ink);
+  }
+  .case-body img {
+    margin-top: 1.25rem;
+    width: 100%;
+    height: auto;
+    border: 1px solid var(--line);
+    border-radius: 0.75rem;
+  }
+</style>

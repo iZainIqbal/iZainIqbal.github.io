@@ -1,0 +1,32 @@
+[
+  {
+    "id": "metaviz",
+    "org": "Metaviz AI",
+    "title": "Software engineer, Flutter and full-stack",
+    "place": "Remote",
+    "start": "2025-08",
+    "end": "present",
+    "summary": "Started on Flutter apps and Strapi backends for fitness, nutrition, e-commerce and wellness clients. Since December 2025 I've worked mainly on a Swiss field-service marketplace: its React web app, FastAPI backend, payments, passwordless sign-in and technical SEO.",
+    "projects": ["field-service-marketplace", "africa-travel-hub", "wanyumba", "grocery-delivery-app", "wellness-app-backend", "nutrition-tracking-app", "ecommerce-app", "ai-fitness-app"]
+  },
+  {
+    "id": "university",
+    "org": "University of Gujrat",
+    "title": "Final year and independent projects",
+    "place": "Gujrat, Pakistan",
+    "start": "2024-05",
+    "end": "2025-07",
+    "summary": "Finished my BS in Computer Science with a Unity final-year project, and published a Flutter app on Google Play.",
+    "projects": ["chrono-chase", "qr-scanner", "chatbot"]
+  },
+  {
+    "id": "bic",
+    "org": "Business Incubation Center, University of Gujrat",
+    "title": "Flutter developer intern",
+    "place": "Gujrat, Pakistan",
+    "start": "2023-11",
+    "end": "2024-04",
+    "summary": "Six-month internship building a real-time blood-donor app with Firebase.",
+    "projects": ["blood-bank"]
+  }
+]

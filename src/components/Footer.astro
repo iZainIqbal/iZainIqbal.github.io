@@ -1,0 +1,17 @@
+---
+import { profile } from "../data/profile";
+---
+
+<footer class="mt-24 border-t border-line">
+  <div
+    class="container-page flex flex-col gap-4 py-10 text-sm text-muted sm:flex-row sm:items-center sm:justify-between"
+  >
+    <p>© {new Date().getFullYear()} {profile.name}</p>
+    <ul class="flex flex-wrap gap-x-5 gap-y-2">
+      <li><a class="hover:text-ink" href={`mailto:${profile.email}`}>{profile.email}</a></li>
+      <li><a class="hover:text-ink" href={profile.linkedin} rel="noopener">LinkedIn</a></li>
+      <li><a class="hover:text-ink" href={profile.github} rel="noopener">GitHub</a></li>
+      <li><a class="hover:text-ink" href="/hire/">Hire me</a></li>
+    </ul>
+  </div>
+</footer>

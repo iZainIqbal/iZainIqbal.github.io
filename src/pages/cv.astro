@@ -1,0 +1,166 @@
+---
+import { getCollection, getEntries } from "astro:content";
+import Base from "../layouts/Base.astro";
+import { profile, education, certifications } from "../data/profile";
+import { cv } from "../data/copy";
+import { byOrder, formatPeriod, sortSkills } from "../lib/format";
+
+const experience = (await getCollection("experience")).sort((a, b) =>
+  b.data.start.localeCompare(a.data.start),
+);
+const roles = await Promise.all(
+  experience.map(async (e) => ({ e, projects: await getEntries(e.data.projects) })),
+);
+const personal = (await getCollection("projects"))
+  .filter((p) => p.data.kind === "personal")
+  .sort(byOrder)
+  .slice(0, 3);
+const skills = sortSkills(await getCollection("skills"));
+---
+
+<Base title="CV" description="CV of Zain Iqbal, full-stack engineer.">
+  <div class="container-page py-10 print:p-0">
+    <div class="mb-8 flex flex-wrap items-center justify-between gap-3 print:hidden">
+      <p class="text-sm text-muted">Same facts as the rest of this site, on one page.</p>
+      <a href={profile.cvPdf} class="btn btn-primary" download>Download PDF</a>
+    </div>
+
+    <article class="cv card mx-auto max-w-[50rem] p-6 sm:p-10 print:max-w-none print:border-0 print:p-0">
+      <header class="border-b border-line pb-5">
+        <h1 class="text-3xl font-bold">{profile.name}</h1>
+        <p class="mt-1 text-lg text-ink-2">{profile.headline}</p>
+        <ul class="mt-2 flex flex-wrap gap-x-3 gap-y-1 text-sm text-muted">
+          <li>{profile.location}</li>
+          <li><a href={`mailto:${profile.email}`}>{profile.email}</a></li>
+          <li><a href={profile.linkedin}>linkedin.com/in/zain-iqbal-devs</a></li>
+          <li><a href={profile.github}>github.com/iZainIqbal</a></li>
+          <li><a href="https://izainiqbal.github.io/">izainiqbal.github.io</a></li>
+        </ul>
+      </header>
+
+      <section class="mt-6">
+        <h2 class="cv-h">Summary</h2>
+        <p class="mt-2 text-ink-2">{cv.summary}</p>
+      </section>
+
+      <section class="mt-6">
+        <h2 class="cv-h">Experience</h2>
+        {
+          roles.map(({ e, projects }) => (
+            <div class="mt-4 break-inside-avoid">
+              <div class="flex flex-wrap items-baseline justify-between gap-x-4">
+                <h3 class="font-semibold">
+                  {e.data.title} · {e.data.org}
+                </h3>
+                <span class="text-sm text-muted">{formatPeriod(e.data.start, e.data.end)}</span>
+              </div>
+              <p class="text-sm text-muted">{e.data.place}</p>
+              <p class="mt-1 text-ink-2">{e.data.summary}</p>
+              {projects.length > 0 && (
+                <ul class="mt-2 grid gap-1.5">
+                  {projects.map((p) => (
+                    <li class="text-[0.95rem] text-ink-2">
+                      <strong class="text-ink">{p.data.title}</strong> ({formatPeriod(p.data.start, p.data.end)}):{" "}
+                      {p.data.myWork.slice(0, p.data.featured ? 3 : 2).join(" ")}
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          ))
+        }
+      </section>
+
+      {
+        personal.length > 0 && (
+          <section class="mt-6">
+            <h2 class="cv-h">Selected personal projects</h2>
+            <ul class="mt-2 grid gap-1.5">
+              {personal.map((p) => (
+                <li class="text-[0.95rem] text-ink-2">
+                  <strong class="text-ink">{p.data.title}</strong>: {p.data.summary}
+                </li>
+              ))}
+            </ul>
+          </section>
+        )
+      }
+
+      <section class="mt-6">
+        <h2 class="cv-h">Skills</h2>
+        <dl class="mt-2 grid gap-1 text-[0.95rem]">
+          {
+            skills.map((g) => (
+              <div class="sm:flex sm:gap-2">
+                <dt class="font-semibold text-ink sm:w-40 sm:shrink-0">{g.data.group}</dt>
+                <dd class="text-ink-2">{g.data.items.map((i) => i.name).join(" · ")}</dd>
+              </div>
+            ))
+          }
+        </dl>
+      </section>
+
+      <section class="mt-6">
+        <h2 class="cv-h">Education</h2>
+        <ul class="mt-2 grid gap-1.5">
+          {
+            education.map((e) => (
+              <li class="text-[0.95rem] text-ink-2">
+                <strong class="text-ink">{e.degree}</strong>, {e.school} ({formatPeriod(e.start, e.end)})
+                {e.note ? ` · ${e.note}` : ""}
+              </li>
+            ))
+          }
+        </ul>
+      </section>
+
+      <section class="mt-6">
+        <h2 class="cv-h">Certifications</h2>
+        <p class="mt-2 text-[0.95rem] text-ink-2">{certifications.join(" · ")}</p>
+      </section>
+    </article>
+  </div>
+</Base>
+
+<style is:global>
+  .cv-h {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .cv a {
+    color: inherit;
+  }
+  @media print {
+    @page {
+      size: A4;
+      margin: 14mm;
+    }
+    header.sticky,
+    footer,
+    a[href="#main"] {
+      display: none !important;
+    }
+    html,
+    body {
+      background: #fff !important;
+      color: #111 !important;
+      font-size: 10pt;
+    }
+    :root,
+    :root[data-theme],
+    :root:not([data-theme="light"]) {
+      --bg: #fff;
+      --surface: #fff;
+      --surface-2: #fff;
+      --ink: #111;
+      --ink-2: #333;
+      --muted: #555;
+      --line: #ddd;
+      --accent: #1d4ed8;
+      color-scheme: light;
+    }
+  }
+</style>

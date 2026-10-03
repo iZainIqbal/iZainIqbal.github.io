@@ -1,0 +1,81 @@
+---
+import "../styles/global.css";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import { profile } from "../data/profile";
+
+interface Props {
+  title: string;
+  description: string;
+  noindex?: boolean;
+}
+
+const { title, description, noindex = false } = Astro.props;
+const fullTitle = title === profile.name ? title : `${title} · ${profile.name}`;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    {noindex ? <meta name="robots" content="noindex" /> : <link rel="canonical" href={canonical} />}
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={new URL("/og.png", Astro.site)} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="theme-color" content="#f7f6f2" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0f1115" media="(prefers-color-scheme: dark)" />
+    <script is:inline>
+      // Apply a saved theme before first paint to avoid a flash.
+      // Motion is opt-in: only when JS runs and the visitor allows motion.
+      if (matchMedia("(prefers-reduced-motion: no-preference)").matches) {
+        document.documentElement.classList.add("js-motion");
+      }
+      try {
+        const t = localStorage.getItem("theme");
+        if (t === "light" || t === "dark") document.documentElement.dataset.theme = t;
+      } catch {}
+    </script>
+  </head>
+  <body class="min-h-dvh flex flex-col">
+    <a
+      href="#main"
+      class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 btn btn-primary"
+      >Skip to content</a
+    >
+    <Header />
+    <main id="main" tabindex="-1" class="flex-1 outline-none">
+      <slot />
+    </main>
+    <Footer />
+    <script>
+      // Reveal elements the first time they scroll into view, staggered per batch.
+      const items = document.querySelectorAll<HTMLElement>(".reveal");
+      if (!("IntersectionObserver" in window)) {
+        items.forEach((el) => el.classList.add("is-in"));
+      } else {
+        const io = new IntersectionObserver(
+          (entries) => {
+            entries
+              .filter((e) => e.isIntersecting)
+              .forEach((e, i) => {
+                const el = e.target as HTMLElement;
+                el.style.transitionDelay = `${Math.min(i, 6) * 90}ms`;
+                el.classList.add("is-in");
+                io.unobserve(el);
+              });
+          },
+          { rootMargin: "0px 0px -8% 0px", threshold: 0.12 },
+        );
+        items.forEach((el) => io.observe(el));
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,113 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { Image } from "astro:assets";
+import { LAYER_LABEL, formatPeriod } from "../lib/format";
+
+interface Props {
+  project: CollectionEntry<"projects">;
+  headingLevel?: "h2" | "h3";
+  // Home page: fewer bullets so four cards stay scannable.
+  compact?: boolean;
+}
+
+const { project, headingLevel = "h3", compact = false } = Astro.props;
+const p = project.data;
+const Heading = headingLevel;
+const href = `/work/${project.id}/`;
+const phoneShots = p.screens.slice(0, 3);
+---
+
+<article class="card card-hover reveal flex flex-col overflow-hidden" aria-labelledby={`t-${project.id}`}>
+  {
+    p.cover ? (
+      <a href={href} class="card-media block overflow-hidden border-b border-line bg-surface-2" tabindex="-1" aria-hidden="true">
+        <Image
+          src={p.cover}
+          alt=""
+          widths={[480, 800]}
+          sizes="(min-width: 1024px) 34rem, 100vw"
+          class="aspect-[16/9] w-full object-cover object-top"
+        />
+      </a>
+    ) : (
+      phoneShots.length > 0 && (
+        // Phone screenshots are portrait; show three side by side instead of cropping one.
+        <a href={href} class="card-media flex aspect-[16/9] items-end justify-center gap-3 overflow-hidden border-b border-line bg-surface-2 px-6 pt-6" tabindex="-1" aria-hidden="true">
+          {phoneShots.map((s) => (
+            <Image src={s} alt="" widths={[160, 320]} sizes="9rem" class="w-[28%] max-w-40 rounded-t-xl border border-b-0 border-line object-cover object-top shadow-sm" />
+          ))}
+        </a>
+      )
+    )
+  }
+  {
+    import.meta.env.DEV && !p.verified && (
+      <p class="bg-amber-200 px-3 py-1 text-xs font-semibold text-amber-950">
+        DEV ONLY · unverified claims, see portfolio-notes/OPEN-QUESTIONS.md
+      </p>
+    )
+  }
+  <div class="flex flex-1 flex-col gap-4 p-5 sm:p-6">
+    <div>
+      <p class="eyebrow">
+        {p.org ? `${p.org} · ` : ""}{formatPeriod(p.start, p.end)}
+      </p>
+      <Heading id={`t-${project.id}`} class="mt-1 text-xl font-semibold">
+        <a href={href} class="no-underline hover:underline">{p.title}</a>
+      </Heading>
+      <p class="mt-1 text-ink-2">{p.summary}</p>
+    </div>
+
+    <dl class="grid gap-3 text-[0.95rem]">
+      <div>
+        <dt class="text-sm font-semibold text-ink">My role</dt>
+        <dd class="text-ink-2">{p.role}{p.team ? ` · ${p.team}` : ""}</dd>
+      </div>
+      <div>
+        <dt class="text-sm font-semibold text-ink">What I built</dt>
+        <dd>
+          <ul class="mt-1 grid gap-1.5">
+            {
+              p.myWork.slice(0, compact ? 2 : 3).map((w) => (
+                <li class="flex gap-2 text-ink-2">
+                  <span aria-hidden="true" class="mt-2.5 size-1.5 shrink-0 rounded-full bg-accent" />
+                  <span>{w}</span>
+                </li>
+              ))
+            }
+          </ul>
+        </dd>
+      </div>
+      {
+        p.teamWork && (
+          <div>
+            <dt class="text-sm font-semibold text-ink">Team built</dt>
+            <dd class="text-muted">{p.teamWork}</dd>
+          </div>
+        )
+      }
+    </dl>
+
+    <div class="mt-auto flex flex-wrap gap-1.5 pt-1" aria-label="Layers I worked in">
+      {p.layers.map((l) => <span class="chip">{LAYER_LABEL[l]}</span>)}
+    </div>
+    {p.links.length === 0 && p.kind !== "client" && <p class="text-xs text-muted">The code is private. Happy to walk you through it.</p>}
+    {
+      p.links.length > 0 && (
+        <ul class="flex flex-wrap gap-x-4 gap-y-1 text-sm" aria-label={`Links for ${p.title}`}>
+          {p.links.map((l) => (
+            <li>
+              <a href={l.url} rel="noopener" class="link-arrow text-ink-2 hover:text-ink">
+                {l.label} <span aria-hidden="true">↗</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      )
+    }
+    <a href={href} class="link-arrow text-sm font-semibold text-accent">
+      Read the details <span aria-hidden="true">→</span>
+      <span class="sr-only"> about {p.title}</span>
+    </a>
+  </div>
+</article>

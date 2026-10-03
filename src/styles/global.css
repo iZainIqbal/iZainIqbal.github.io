@@ -1,0 +1,294 @@
+@import "@fontsource-variable/inter";
+@import "tailwindcss";
+
+/* Design tokens. Light is the default; dark follows the OS unless the visitor
+   picks a theme (data-theme on <html>), so both paths are declared. */
+:root {
+  --bg: #f7f6f2;
+  --surface: #ffffff;
+  --surface-2: #efede7;
+  --ink: #15171c;
+  --ink-2: #3d434f;
+  --muted: #5f6674;
+  --line: #e2dfd7;
+  --accent: #1d4ed8;
+  --accent-ink: #ffffff;
+  --accent-soft: #e3eaff;
+  --team: #d9d6ce;
+  --ok: #0f7a4f;
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f1115;
+    --surface: #161920;
+    --surface-2: #1d212a;
+    --ink: #eef0f4;
+    --ink-2: #c6cad3;
+    --muted: #9aa1ae;
+    --line: #2a2f3a;
+    --accent: #8aa8ff;
+    --accent-ink: #0f1115;
+    --accent-soft: #1d2744;
+    --team: #3a404c;
+    --ok: #4fd1a0;
+    color-scheme: dark;
+  }
+}
+
+:root[data-theme="dark"] {
+  --bg: #0f1115;
+  --surface: #161920;
+  --surface-2: #1d212a;
+  --ink: #eef0f4;
+  --ink-2: #c6cad3;
+  --muted: #9aa1ae;
+  --line: #2a2f3a;
+  --accent: #8aa8ff;
+  --accent-ink: #0f1115;
+  --accent-soft: #1d2744;
+  --team: #3a404c;
+  --ok: #4fd1a0;
+  color-scheme: dark;
+}
+
+@theme {
+  --font-sans: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-accent: var(--accent);
+  --color-accent-ink: var(--accent-ink);
+  --color-accent-soft: var(--accent-soft);
+  --color-team: var(--team);
+  --color-ok: var(--ok);
+}
+
+@layer base {
+  html {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+    scroll-behavior: smooth;
+  }
+  body {
+    background: var(--bg);
+    font-size: 1.0625rem;
+    line-height: 1.65;
+    font-feature-settings: "cv11", "ss01";
+  }
+  h1,
+  h2,
+  h3 {
+    color: var(--ink);
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    text-wrap: balance;
+  }
+  p {
+    text-wrap: pretty;
+  }
+  a {
+    text-underline-offset: 3px;
+  }
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      transition: none !important;
+      animation: none !important;
+    }
+  }
+}
+
+@layer components {
+  .container-page {
+    width: 100%;
+    max-width: 72rem;
+    margin-inline: auto;
+    padding-inline: 1rem;
+  }
+  @media (min-width: 640px) {
+    .container-page {
+      padding-inline: 1.5rem;
+    }
+  }
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    border-radius: 0.625rem;
+    padding: 0.7rem 1.1rem;
+    font-weight: 600;
+    font-size: 0.95rem;
+    line-height: 1;
+    transition:
+      background-color 150ms,
+      border-color 150ms,
+      color 150ms;
+  }
+  .btn-primary {
+    background: var(--accent);
+    color: var(--accent-ink);
+  }
+  .btn-primary:hover {
+    filter: brightness(1.08);
+  }
+  .btn-ghost {
+    border: 1px solid var(--line);
+    color: var(--ink);
+    background: var(--surface);
+  }
+  .btn-ghost:hover {
+    border-color: var(--ink-2);
+  }
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 0.15rem 0.6rem;
+    font-size: 0.8rem;
+    color: var(--ink-2);
+    background: var(--surface);
+    white-space: nowrap;
+  }
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 1rem;
+  }
+  .prose-page {
+    max-width: 68ch;
+  }
+}
+
+/* ---------- Motion ----------
+   Everything below only runs when the visitor allows motion (html.js-motion is
+   set in Base.astro). Without JS or with reduced motion, content is static. */
+
+@view-transition {
+  navigation: auto;
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Hero: children rise in one after another on page load. */
+html.js-motion .hero-in > * {
+  animation: fade-up 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+html.js-motion .hero-in > *:nth-child(2) { animation-delay: 80ms; }
+html.js-motion .hero-in > *:nth-child(3) { animation-delay: 160ms; }
+html.js-motion .hero-in > *:nth-child(4) { animation-delay: 240ms; }
+html.js-motion .hero-photo {
+  animation: fade-up 0.9s 200ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+/* Scroll reveal: elements fade up the first time they enter the screen. */
+html.js-motion .reveal {
+  transition:
+    opacity 0.6s ease,
+    transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+html.js-motion .reveal:not(.is-in) {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+/* Cards lift slightly on hover; their image zooms a touch. */
+.card-hover {
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease,
+    opacity 0.6s ease;
+}
+.card-hover:hover {
+  transform: translateY(-4px);
+  border-color: var(--ink-2);
+  box-shadow: 0 18px 40px -20px rgb(0 0 0 / 0.35);
+}
+.card-hover .card-media img {
+  transition: transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.card-hover:hover .card-media img {
+  transform: scale(1.04);
+}
+.link-arrow span[aria-hidden] {
+  display: inline-block;
+  transition: transform 0.2s ease;
+}
+.link-arrow:hover span[aria-hidden] {
+  transform: translateX(4px);
+}
+
+/* Timeline: the line draws down, then each dot pops in. */
+.timeline {
+  position: relative;
+}
+.timeline::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.5rem;
+  bottom: 0.5rem;
+  width: 1px;
+  background: var(--line);
+  transform-origin: top;
+}
+html.js-motion .timeline::before {
+  transform: scaleY(0);
+  transition: transform 1.2s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+html.js-motion .timeline.is-in::before {
+  transform: scaleY(1);
+}
+html.js-motion .timeline .dot {
+  transition: transform 0.4s cubic-bezier(0.3, 1.6, 0.5, 1) 0.3s;
+}
+html.js-motion .timeline li:not(.is-in) .dot {
+  transform: scale(0);
+}
+.timeline .dot-current {
+  box-shadow: 0 0 0 0 var(--accent);
+}
+html.js-motion .timeline .dot-current {
+  animation: pulse 2.4s ease-out 1.2s infinite;
+}
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent) 45%, transparent); }
+  70% { box-shadow: 0 0 0 10px transparent; }
+  100% { box-shadow: 0 0 0 0 transparent; }
+}

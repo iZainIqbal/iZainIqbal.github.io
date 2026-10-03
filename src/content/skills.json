@@ -1,0 +1,60 @@
+[
+  {
+    "id": "web",
+    "group": "Web",
+    "items": [
+      { "name": "React + TypeScript", "evidence": ["field-service-marketplace"] },
+      { "name": "Vite, Tailwind CSS", "evidence": ["field-service-marketplace"] },
+      { "name": "Technical SEO (pre-rendering, JSON-LD, hreflang)", "evidence": ["field-service-marketplace", "africa-travel-hub", "wanyumba"] },
+      { "name": "End-to-end tests (Playwright)", "evidence": ["field-service-marketplace"] }
+    ]
+  },
+  {
+    "id": "backend",
+    "group": "Backend",
+    "items": [
+      { "name": "FastAPI, SQLAlchemy, Alembic", "evidence": ["field-service-marketplace"] },
+      { "name": "Celery background jobs", "evidence": ["field-service-marketplace"] },
+      { "name": "Strapi (headless CMS)", "evidence": ["wellness-app-backend", "ecommerce-app"] },
+      { "name": "Passkeys / WebAuthn", "evidence": ["field-service-marketplace"] }
+    ]
+  },
+  {
+    "id": "mobile",
+    "group": "Mobile",
+    "items": [
+      { "name": "Flutter + Dart", "evidence": ["ai-fitness-app", "ecommerce-app", "grocery-delivery-app", "mindmemo"] },
+      { "name": "Provider, BLoC", "evidence": ["ai-fitness-app", "ecommerce-app", "chatbot"] },
+      { "name": "Firebase (Auth, Realtime DB, FCM)", "evidence": ["ride-hailing"] },
+      { "name": "Google Maps, Places, geolocation", "evidence": ["ride-hailing", "grocery-delivery-app"] }
+    ]
+  },
+  {
+    "id": "payments",
+    "group": "Payments",
+    "items": [
+      { "name": "Stripe (PaymentSheet, subscriptions)", "evidence": ["ecommerce-app", "field-service-marketplace"] },
+      { "name": "TWINT and tap-to-pay flows", "evidence": ["field-service-marketplace"] }
+    ]
+  },
+  {
+    "id": "ai",
+    "group": "AI",
+    "items": [
+      { "name": "On-device LLMs (llama.cpp)", "evidence": ["mindmemo"] },
+      { "name": "Claude API, n8n workflows", "evidence": ["lead-pipeline"] },
+      { "name": "AI assistant integration", "evidence": ["field-service-marketplace"] },
+      { "name": "Dialogflow", "evidence": ["chatbot"] }
+    ]
+  },
+  {
+    "id": "data",
+    "group": "Data & quality",
+    "items": [
+      { "name": "Python, pandas ETL", "evidence": ["lead-pipeline"] },
+      { "name": "pytest, mypy, ruff", "evidence": ["lead-pipeline"] },
+      { "name": "PostgreSQL, SQLite", "evidence": ["field-service-marketplace", "mindmemo"] },
+      { "name": "GitHub Actions CI", "evidence": ["field-service-marketplace"] }
+    ]
+  }
+]

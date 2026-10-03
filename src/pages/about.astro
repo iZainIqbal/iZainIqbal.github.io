@@ -1,0 +1,93 @@
+---
+import { getCollection, getEntries } from "astro:content";
+import { Image } from "astro:assets";
+import Base from "../layouts/Base.astro";
+import Timeline from "../components/Timeline.astro";
+import portrait from "../assets/profilepicture.webp";
+import { about } from "../data/copy";
+import { education } from "../data/profile";
+import { formatPeriod, sortSkills } from "../lib/format";
+
+const skillGroups = await Promise.all(
+  sortSkills(await getCollection("skills")).map(async (g) => ({
+    group: g.data.group,
+    items: await Promise.all(
+      g.data.items.map(async (it) => ({ name: it.name, evidence: await getEntries(it.evidence) })),
+    ),
+  })),
+);
+---
+
+<Base title="About" description={about.metaDescription}>
+  <section class="container-page grid gap-8 pt-14 pb-10 sm:grid-cols-[1fr_auto] sm:items-start">
+    <div>
+      <p class="eyebrow">About</p>
+      <h1 class="mt-3 text-4xl font-bold">{about.title}</h1>
+      {about.paragraphs.map((t) => <p class="mt-4 max-w-[64ch] text-ink-2">{t}</p>)}
+    </div>
+    <div class="size-32 overflow-hidden rounded-full border border-line sm:size-40">
+      <Image
+        src={portrait}
+        alt="Portrait of Zain Iqbal"
+        widths={[160, 320]}
+        sizes="10rem"
+        class="size-full scale-[1.12] object-cover"
+        loading="eager"
+      />
+    </div>
+  </section>
+
+  <section class="container-page py-10" aria-labelledby="tl-h">
+    <h2 id="tl-h" class="mb-6 text-2xl font-bold">Timeline</h2>
+    <Timeline />
+  </section>
+
+  <section class="container-page py-10" aria-labelledby="skills-h">
+    <h2 id="skills-h" class="text-2xl font-bold">Skills, with where I used them</h2>
+    <p class="mt-2 max-w-[64ch] text-ink-2">
+      Every skill links to the project that proves it. Skills without a project are not listed.
+    </p>
+    <div class="mt-6 grid gap-5 md:grid-cols-2">
+      {
+        skillGroups.map((g) => (
+          <section class="card card-hover reveal p-5">
+            <h3 class="font-semibold">{g.group}</h3>
+            <ul class="mt-3 grid gap-2 text-sm">
+              {g.items.map((it) => (
+                <li class="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
+                  <span class="font-medium text-ink">{it.name}</span>
+                  <span class="text-muted">
+                    {it.evidence.map((p, i) => (
+                      <>
+                        {i > 0 && ", "}
+                        <a href={`/work/${p.id}/`} class="hover:text-ink">
+                          {p.data.title}
+                        </a>
+                      </>
+                    ))}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </section>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="container-page py-10" aria-labelledby="edu-h">
+    <h2 id="edu-h" class="mb-6 text-2xl font-bold">Education</h2>
+    <ul class="grid gap-4">
+      {
+        education.map((e) => (
+          <li class="card reveal p-5">
+            <p class="eyebrow">{formatPeriod(e.start, e.end)}</p>
+            <h3 class="mt-1 font-semibold">{e.degree}</h3>
+            <p class="text-ink-2">{e.school}</p>
+            {e.note && <p class="mt-1 text-sm text-muted">{e.note}</p>}
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+</Base>

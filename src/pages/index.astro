@@ -1,0 +1,89 @@
+---
+import { getCollection } from "astro:content";
+import Base from "../layouts/Base.astro";
+import ProjectCard from "../components/ProjectCard.astro";
+import Timeline from "../components/Timeline.astro";
+import { Image } from "astro:assets";
+import portrait from "../assets/profilepicture.webp";
+import { profile } from "../data/profile";
+import { home } from "../data/copy";
+import { byOrder } from "../lib/format";
+
+const all = (await getCollection("projects")).sort(byOrder);
+const featured = all.filter((p) => p.data.featured);
+---
+
+<Base title={profile.name} description={home.metaDescription}>
+  <!-- 10-second layer: who, what, next step -->
+  <section class="container-page grid items-center gap-10 pt-12 pb-10 sm:pt-16 lg:grid-cols-[1fr_17rem] lg:pb-14">
+    <div class="hero-in">
+    <p class="eyebrow">{home.eyebrow}</p>
+    <h1 class="mt-4 max-w-[20ch] text-4xl font-bold sm:text-5xl">
+      {home.title}
+    </h1>
+    <p class="mt-5 max-w-[60ch] text-lg text-ink-2">{home.lede}</p>
+
+
+    <div class="mt-8 flex flex-wrap gap-3">
+      <a href="/work/" class="btn btn-primary">See my work</a>
+      <a href="/cv/" class="btn btn-ghost">View CV</a>
+    </div>
+    </div>
+    <!-- The source photo has a dark frame around a circle; crop into the circle. -->
+    <div class="hero-photo hidden aspect-square w-full overflow-hidden rounded-full border border-line lg:block">
+      <Image
+        src={portrait}
+        alt="Portrait of Zain Iqbal"
+        widths={[320, 640]}
+        sizes="17rem"
+        loading="eager"
+        class="size-full scale-[1.12] object-cover"
+      />
+    </div>
+  </section>
+
+
+  <section class="container-page py-10" aria-labelledby="sum-h">
+    <div class="card reveal grid gap-6 p-6 sm:p-8 lg:grid-cols-[1fr_22rem]">
+      <div>
+        <h2 id="sum-h" class="text-2xl font-bold">{home.summaryTitle}</h2>
+        <p class="mt-3 max-w-[64ch] text-ink-2">{home.summary}</p>
+        <p class="mt-4 font-mono text-sm text-muted">{home.stack}</p>
+      </div>
+      <div>
+        <h3 class="text-sm font-semibold">Specialities</h3>
+        <ul class="mt-3 flex flex-wrap gap-2">
+          {home.specialities.map((s) => <li class="chip">{s}</li>)}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="container-page py-12" aria-labelledby="work-h">
+    <div class="mb-6 flex flex-wrap items-end justify-between gap-3">
+      <h2 id="work-h" class="text-2xl font-bold sm:text-3xl">Selected work</h2>
+      <a href="/work/" class="link-arrow text-sm font-semibold text-accent">All projects <span aria-hidden="true">→</span></a>
+    </div>
+    <div class="grid gap-6 lg:grid-cols-2">
+      {featured.map((p) => <ProjectCard project={p} compact />)}
+    </div>
+  </section>
+
+  <section class="container-page py-12" aria-labelledby="path-h">
+    <h2 id="path-h" class="mb-6 text-2xl font-bold sm:text-3xl">How I got here</h2>
+    <Timeline compact />
+  </section>
+
+  <section class="container-page py-12" aria-labelledby="contact-h">
+    <div class="card reveal flex flex-col gap-5 p-6 sm:flex-row sm:items-center sm:justify-between sm:p-8">
+      <div>
+        <h2 id="contact-h" class="text-2xl font-bold">{home.contactTitle}</h2>
+        <p class="mt-1 text-ink-2">{home.contactText}</p>
+      </div>
+      <div class="flex flex-wrap gap-3">
+        <a href={`mailto:${profile.email}`} class="btn btn-primary">Email me</a>
+        <a href={profile.linkedin} rel="noopener" class="btn btn-ghost">LinkedIn</a>
+      </div>
+    </div>
+  </section>
+</Base>

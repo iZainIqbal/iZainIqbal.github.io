@@ -1,0 +1,51 @@
+---
+import { getCollection, getEntries } from "astro:content";
+import { formatPeriod } from "../lib/format";
+
+interface Props {
+  compact?: boolean;
+}
+
+const { compact = false } = Astro.props;
+const entries = (await getCollection("experience")).sort((a, b) =>
+  b.data.start.localeCompare(a.data.start),
+);
+const withProjects = await Promise.all(
+  entries.map(async (e) => ({ e, projects: await getEntries(e.data.projects) })),
+);
+---
+
+<ol class="timeline reveal grid gap-8 pl-6">
+  {
+    withProjects.map(({ e, projects }) => (
+      <li class="reveal relative">
+        <span
+          class:list={[
+            "dot absolute -left-[1.84rem] top-1.5 size-3 rounded-full border-2 border-bg",
+            e.data.end === "present" ? "dot-current bg-accent" : "bg-team",
+          ]}
+          aria-hidden="true"
+        />
+        <p class="eyebrow">{formatPeriod(e.data.start, e.data.end)}</p>
+        <h3 class="mt-1 text-lg font-semibold">
+          {e.data.title} <span class="font-normal text-muted">· {e.data.org}</span>
+        </h3>
+        {!compact && <p class="text-sm text-muted">{e.data.place}</p>}
+        <p class="mt-1 max-w-[68ch] text-ink-2">{e.data.summary}</p>
+        {projects.length > 0 && (
+          <p class="mt-2 text-sm text-muted">
+            Projects:{" "}
+            {projects.map((p, i) => (
+              <>
+                {i > 0 && ", "}
+                <a href={`/work/${p.id}/`} class="text-ink-2 hover:text-ink">
+                  {p.data.title}
+                </a>
+              </>
+            ))}
+          </p>
+        )}
+      </li>
+    ))
+  }
+</ol>
