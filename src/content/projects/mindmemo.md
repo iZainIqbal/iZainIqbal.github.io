@@ -11,6 +11,10 @@ myWork:
   - Built long-term memory. After each chat, the app saves key facts about the user on the phone and uses them in later chats.
   - Added optional web search, a reasoning mode with collapsible thinking steps, and a biometric lock with secure storage.
 stack: [Flutter, llama.cpp, Qwen2.5, SQLite, Provider, local_auth]
+screens:
+  - ../../assets/screens/mindmemo_chat.webp
+  - ../../assets/screens/mindmemo_memories.webp
+  - ../../assets/screens/mindmemo_models.webp
 featured: true
 order: 4
 verified: true

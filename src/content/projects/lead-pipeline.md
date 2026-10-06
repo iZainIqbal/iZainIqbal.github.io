@@ -12,7 +12,7 @@ myWork:
   - Wrote 223 automated tests covering every data source, filter and cleaning step, plus strict code checks.
   - Reads contact details from company websites while respecting each site's crawling rules.
 stack: [Python, pandas, parsel, FastAPI, SQLite, pytest, mypy, ruff, n8n, Claude API]
-featured: true
+featured: false
 order: 5
 verified: true
 ---

@@ -13,7 +13,7 @@ const html = `<!doctype html><html><body style="margin:0">
     <div style="font-size:26px;color:#1d4ed8;font-weight:600;margin-top:34px">izainiqbal.github.io</div>
   </div>
   <div style="width:300px;height:300px;border-radius:50%;overflow:hidden;border:2px solid #e2dfd7;flex:none">
-    <img src="data:image/webp;base64,${photo}" style="width:100%;height:100%;object-fit:cover;transform:scale(1.12)">
+    <img src="data:image/webp;base64,${photo}" style="width:100%;height:100%;object-fit:cover">
   </div>
 </div></body></html>`;
 

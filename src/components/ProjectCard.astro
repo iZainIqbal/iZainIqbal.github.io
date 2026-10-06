@@ -6,36 +6,63 @@ import CountText from "./CountText.astro";
 
 interface Props {
   project: CollectionEntry<"projects">;
-  headingLevel?: "h2" | "h3";
-  // Home page: fewer bullets so four cards stay scannable.
-  compact?: boolean;
+  headingLevel?: "h2" | "h3" | "h4";
+  // "full" on /work. The home page uses "feature" for the lead project (image beside
+  // the text on desktop) and "compact" for the rest (two bullets, no layer chips).
+  variant?: "full" | "feature" | "compact";
 }
 
-const { project, headingLevel = "h3", compact = false } = Astro.props;
+const { project, headingLevel = "h3", variant = "full" } = Astro.props;
 const p = project.data;
 const Heading = headingLevel;
 const href = `/work/${project.id}/`;
 const phoneShots = p.screens.slice(0, 3);
+const wide = variant === "feature";
 ---
 
-<article class="card card-hover reveal flex flex-col overflow-hidden" aria-labelledby={`t-${project.id}`}>
+<article
+  class:list={["card card-hover reveal flex flex-col overflow-hidden", wide && "lg:grid lg:grid-cols-[1.3fr_1fr]"]}
+  aria-labelledby={`t-${project.id}`}
+>
   {
     p.cover ? (
-      <a href={href} class="card-media block overflow-hidden border-b border-line bg-surface-2" tabindex="-1" aria-hidden="true">
+      <a
+        href={href}
+        class:list={["card-media block overflow-hidden border-b border-line bg-surface-2", wide && "lg:border-r lg:border-b-0"]}
+        tabindex="-1"
+        aria-hidden="true"
+      >
         <Image
           src={p.cover}
           alt=""
-          widths={[480, 800]}
-          sizes="(min-width: 1024px) 34rem, 100vw"
-          class="aspect-[16/9] w-full object-cover object-top"
+          widths={wide ? [480, 800, 1200] : [480, 800]}
+          sizes={wide ? "(min-width: 1024px) 40rem, 100vw" : "(min-width: 1024px) 34rem, 100vw"}
+          class:list={["aspect-[16/9] w-full object-cover object-top", wide && "lg:aspect-auto lg:h-full lg:object-left-top"]}
         />
       </a>
     ) : (
       phoneShots.length > 0 && (
         // Phone screenshots are portrait; show three side by side instead of cropping one.
-        <a href={href} class="card-media flex aspect-[16/9] items-end justify-center gap-3 overflow-hidden border-b border-line bg-surface-2 px-6 pt-6" tabindex="-1" aria-hidden="true">
+        <a
+          href={href}
+          class:list={[
+            "card-media flex aspect-[16/9] items-end justify-center gap-3 overflow-hidden border-b border-line bg-surface-2 px-6 pt-6",
+            wide && "lg:aspect-auto lg:items-center lg:gap-4 lg:border-r lg:border-b-0 lg:py-8",
+          ]}
+          tabindex="-1"
+          aria-hidden="true"
+        >
           {phoneShots.map((s) => (
-            <Image src={s} alt="" widths={[160, 320]} sizes="9rem" class="w-[28%] max-w-40 rounded-t-xl border border-b-0 border-line object-cover object-top shadow-sm" />
+            <Image
+              src={s}
+              alt=""
+              widths={[160, 320, 400]}
+              sizes={wide ? "12rem" : "9rem"}
+              class:list={[
+                "w-[28%] max-w-40 rounded-t-xl border border-b-0 border-line object-cover object-top shadow-sm",
+                wide && "lg:max-w-48 lg:rounded-xl lg:border-b",
+              ]}
+            />
           ))}
         </a>
       )
@@ -69,7 +96,7 @@ const phoneShots = p.screens.slice(0, 3);
         <dd>
           <ul class="mt-1 grid gap-1.5">
             {
-              p.myWork.slice(0, compact ? 2 : 3).map((w) => (
+              p.myWork.slice(0, variant === "compact" ? 2 : 3).map((w) => (
                 <li class="flex gap-2 text-ink-2">
                   <span aria-hidden="true" class="mt-2.5 size-1.5 shrink-0 rounded-full bg-accent" />
                   <span><CountText text={w} /></span>
@@ -89,9 +116,16 @@ const phoneShots = p.screens.slice(0, 3);
       }
     </dl>
 
-    <div class="mt-auto flex flex-wrap gap-1.5 pt-1" aria-label="Layers I worked in">
-      {p.layers.map((l) => <span class="chip">{LAYER_LABEL[l]}</span>)}
-    </div>
+    {
+      variant === "full" ? (
+        <div class="mt-auto flex flex-wrap gap-1.5 pt-1" aria-label="Layers I worked in">
+          {p.layers.map((l) => <span class="chip">{LAYER_LABEL[l]}</span>)}
+        </div>
+      ) : (
+        // The home page already lists skills; no chips here keeps links pinned to the bottom.
+        <div class="mt-auto" />
+      )
+    }
     {p.links.length === 0 && p.kind !== "client" && <p class="text-xs text-muted">The code is private. Happy to walk you through it.</p>}
     {
       p.links.length > 0 && (
