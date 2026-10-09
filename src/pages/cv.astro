@@ -1,5 +1,5 @@
 ---
-import { getCollection, getEntries } from "astro:content";
+import { getCollection } from "astro:content";
 import Base from "../layouts/Base.astro";
 import { profile, education, certifications } from "../data/profile";
 import { cv } from "../data/copy";
@@ -8,9 +8,7 @@ import { byOrder, formatPeriod, sortSkills } from "../lib/format";
 const experience = (await getCollection("experience")).sort((a, b) =>
   b.data.start.localeCompare(a.data.start),
 );
-const roles = await Promise.all(
-  experience.map(async (e) => ({ e, projects: await getEntries(e.data.projects) })),
-);
+const roles = experience;
 const personal = (await getCollection("projects"))
   .filter((p) => p.data.kind === "personal")
   .sort(byOrder)
@@ -21,7 +19,7 @@ const skills = sortSkills(await getCollection("skills"));
 <Base title="CV" description="CV of Zain Iqbal, full-stack engineer.">
   <div class="container-page py-10 print:p-0">
     <div class="mb-8 flex flex-wrap items-center justify-between gap-3 print:hidden">
-      <p class="text-sm text-muted">Same facts as the rest of this site, on one page.</p>
+      <p class="text-sm text-muted">Current experience, skills and selected projects.</p>
       <a href={profile.cvPdf} class="btn btn-primary" download>Download PDF</a>
     </div>
 
@@ -46,26 +44,16 @@ const skills = sortSkills(await getCollection("skills"));
       <section class="mt-6">
         <h2 class="cv-h">Experience</h2>
         {
-          roles.map(({ e, projects }) => (
+          roles.map((e) => (
             <div class="mt-4 break-inside-avoid">
               <div class="flex flex-wrap items-baseline justify-between gap-x-4">
                 <h3 class="font-semibold">
-                  {e.data.title} · {e.data.org}
+                  {e.data.title} | {e.data.org}
                 </h3>
                 <span class="text-sm text-muted">{formatPeriod(e.data.start, e.data.end)}</span>
               </div>
               <p class="text-sm text-muted">{e.data.place}</p>
               <p class="mt-1 text-ink-2">{e.data.summary}</p>
-              {projects.length > 0 && (
-                <ul class="mt-2 grid gap-1.5">
-                  {projects.map((p) => (
-                    <li class="text-[0.95rem] text-ink-2">
-                      <strong class="text-ink">{p.data.title}</strong> ({formatPeriod(p.data.start, p.data.end)}):{" "}
-                      {p.data.myWork.slice(0, p.data.featured ? 3 : 2).join(" ")}
-                    </li>
-                  ))}
-                </ul>
-              )}
             </div>
           ))
         }
@@ -74,7 +62,7 @@ const skills = sortSkills(await getCollection("skills"));
       {
         personal.length > 0 && (
           <section class="mt-6">
-            <h2 class="cv-h">Selected personal projects</h2>
+            <h2 class="cv-h">Selected Projects</h2>
             <ul class="mt-2 grid gap-1.5">
               {personal.map((p) => (
                 <li class="text-[0.95rem] text-ink-2">
