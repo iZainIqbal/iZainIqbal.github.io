@@ -12,7 +12,8 @@ myWork:
 stack: [Flutter, flutter_bloc, Dialogflow ES]
 links:
   - { label: "Code on GitHub", url: "https://github.com/iZainIqbal/chatbot", kind: code }
-cover: ../../assets/chat_screen.webp
+cover: ../../assets/covers/dialogflow-chatbot.webp
+coverNote: Conceptual project visual.
 order: 31
 verified: true
 ---

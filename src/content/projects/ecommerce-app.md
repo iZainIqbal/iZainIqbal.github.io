@@ -12,6 +12,8 @@ myWork:
   - Added card payments with Stripe, confirmed on the server rather than in the app.
 teamWork: The visual-search and recommendation features were built by others.
 stack: [Flutter, Provider, Strapi 5, Stripe]
+cover: ../../assets/covers/ecommerce-app.webp
+coverNote: Conceptual project visual.
 confidential: true
 client:
   title: Mobile commerce
@@ -19,6 +21,7 @@ client:
   story: Helping shoppers browse products, manage their cart and complete purchases.
   contribution: Built the Flutter shopping app and Strapi backend, including product models, orders and payment integration.
   tags: [Flutter, Dart, Strapi, Stripe]
+  cover: ../../assets/covers/ecommerce-app.webp
   order: 2
 featured: true
 order: 2

@@ -12,6 +12,8 @@ myWork:
   - Reworked the dashboard layout.
 teamWork: The rest of the app, including the WooCommerce integration and payments, was built by the wider team.
 stack: [Flutter, WooCommerce REST API]
+cover: ../../assets/covers/grocery-delivery.webp
+coverNote: Adapted from product screens.
 screens:
   - ../../assets/screens/grocery_home.webp
   - ../../assets/screens/grocery_choose_diet.webp

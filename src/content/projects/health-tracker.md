@@ -10,6 +10,8 @@ myWork:
   - Built workout, plan calendar, mood, hydration, calorie and weight screens with Provider state.
   - Wrote 15 unit and widget tests, plus developer documentation.
 stack: [Flutter, Provider, flutter_test]
+cover: ../../assets/covers/health-tracker.webp
+coverNote: Conceptual project visual.
 links:
   - { label: "Code on GitHub", url: "https://github.com/iZainIqbal/health_tracker_app", kind: code }
 order: 30

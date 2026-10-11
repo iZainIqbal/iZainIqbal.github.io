@@ -12,6 +12,8 @@ myWork:
   - Fixed database connection-pool configuration.
 teamWork: I did not build the Flutter app.
 stack: [Strapi, Node.js, TypeScript, PostgreSQL]
+cover: ../../assets/covers/wellness.webp
+coverNote: Product app shown. My contribution was the backend.
 screens:
   - ../../assets/screens/wellness_Home.webp
   - ../../assets/screens/wellness_progressscreen.webp

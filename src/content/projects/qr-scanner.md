@@ -12,7 +12,8 @@ myWork:
 stack: [Flutter, Android MediaStore]
 links:
   - { label: "Launch post", url: "https://www.linkedin.com/posts/netsflow_appdevelopment-flutterdev-netsflow-activity-7243544883993464832-XlSh", kind: post }
-cover: ../../assets/qr_scanner.webp
+cover: ../../assets/covers/qr-scanner.webp
+coverNote: Conceptual project visual.
 order: 71
 verified: false
 ---

@@ -12,6 +12,8 @@ myWork:
   - Built the AI coach chat with conversation history, using Provider for state.
 teamWork: The AI models and backend were built by others.
 stack: [Flutter, Provider, Firebase, GPT-4o]
+cover: ../../assets/covers/ai-fitness.webp
+coverNote: Adapted from product screens.
 confidential: true
 client:
   title: Fitness coaching
@@ -20,6 +22,7 @@ client:
   contribution: Built the Flutter frontend, including onboarding, plans, tracking and coach chat.
   note: The AI models and the backend were built by other engineers.
   tags: [Flutter, Dart, Provider]
+  cover: ../../assets/covers/ai-fitness.webp
   order: 3
 featured: true
 order: 3

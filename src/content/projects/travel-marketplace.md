@@ -18,7 +18,8 @@ results:
 links:
   - { label: "Live site", url: "https://africatravelhub.com", kind: live }
 stack: [React, Vite, i18next, JSON-LD, nginx]
-cover: ../../assets/platform/travel-home.jpg
+cover: ../../assets/covers/travel-marketplace.webp
+coverNote: Adapted from product screens.
 order: 6
 verified: false
 ---

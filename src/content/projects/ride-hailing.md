@@ -11,6 +11,8 @@ myWork:
   - Built the driver app with live location, ride acceptance and an earnings page.
   - Built a Flutter Web admin panel that lists users, drivers and trips.
 stack: [Flutter, Firebase Auth, Realtime Database, FCM, Google Maps, GeoFire]
+cover: ../../assets/covers/ride-hailing.webp
+coverNote: Conceptual project visual.
 order: 60
 verified: true
 ---

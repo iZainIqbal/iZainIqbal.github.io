@@ -20,7 +20,8 @@ links:
   - { label: "Google Play", url: "https://play.google.com/store/apps/details?id=com.mymarketsholdings.wanyumba", kind: store }
   - { label: "App Store", url: "https://apps.apple.com/tz/app/wanyumba/id6785371058", kind: store }
 stack: [React, TypeScript, Vite, Node.js, nginx]
-cover: ../../assets/platform/property-home.jpg
+cover: ../../assets/covers/property-marketplace.webp
+coverNote: Adapted from product screens.
 order: 7
 verified: false
 ---
