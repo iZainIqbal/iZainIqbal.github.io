@@ -6,7 +6,7 @@ const isActive = (href: string) => path.startsWith(href);
 ---
 
 <header class="sticky top-0 z-40 border-b border-line bg-bg/85 backdrop-blur">
-  <div class="container-page flex h-16 items-center justify-between gap-4">
+  <div class="container-page flex h-16 items-center justify-between gap-2 min-[360px]:gap-4">
     <a href="/" class="font-semibold whitespace-nowrap tracking-tight text-ink no-underline">
       {profile.name}
     </a>
@@ -34,10 +34,11 @@ const isActive = (href: string) => path.startsWith(href);
       >
         Hire me
       </a>
+      <!-- Below 360px there is no room for the toggle; the theme then follows the phone's setting. -->
       <button
         type="button"
         data-theme-toggle
-        class="grid size-9 shrink-0 place-items-center rounded-md text-muted hover:text-ink sm:ml-1"
+        class="hidden size-9 shrink-0 place-items-center rounded-md text-muted hover:text-ink min-[360px]:grid sm:ml-1"
         aria-label="Dark theme"
         aria-pressed="false"
       >
