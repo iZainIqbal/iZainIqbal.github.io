@@ -21,7 +21,7 @@ export const about = {
   paragraphs: [
     "I started with Flutter in 2023 and built mobile apps through an internship, university projects and my own app on Google Play.",
     "At Metaviz AI in Lahore I built Flutter apps and Strapi backends for fitness, nutrition, e-commerce and wellness products. Since December 2025 most of my work has been on a Swiss field-service marketplace, where I moved into React, TypeScript and FastAPI and work on payments, passwordless sign-in, the AI assistant and technical SEO. Since September 2026 I've also done frontend work on travel and property marketplaces, focused on SEO and page speed. I learn new tools quickly and use AI coding agents to explore code, draft changes, and assist with tests and debugging, then review and verify the work before integration.",
-    "Alongside client work I build my own tools, like an AI assistant that runs fully on the phone and a tested Python data pipeline.",
+    "Alongside client work I build my own tools, like an AI assistant that runs its models on the phone.",
   ],
 };
 

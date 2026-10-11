@@ -42,7 +42,6 @@
     "group": "AI",
     "items": [
       { "name": "On-device LLMs (llama.cpp)", "evidence": ["mindmemo"] },
-      { "name": "Claude API, n8n workflows", "evidence": ["lead-pipeline"] },
       { "name": "AI assistant integration", "evidence": ["field-service-marketplace"] },
       { "name": "Dialogflow", "evidence": ["chatbot"] }
     ]
@@ -51,8 +50,6 @@
     "id": "data",
     "group": "Data & quality",
     "items": [
-      { "name": "Python, pandas ETL", "evidence": ["lead-pipeline"] },
-      { "name": "pytest, mypy, ruff", "evidence": ["lead-pipeline"] },
       { "name": "PostgreSQL, SQLite", "evidence": ["field-service-marketplace", "mindmemo"] },
       { "name": "GitHub Actions CI", "evidence": ["field-service-marketplace"] }
     ]
