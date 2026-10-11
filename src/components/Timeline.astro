@@ -49,3 +49,52 @@ const withProjects = await Promise.all(
     ))
   }
 </ol>
+
+<script>
+  // Scroll progress for the timeline: fills the rail and marks the entries the
+  // reading line has passed. Only runs when the visitor allows motion.
+  const READING_LINE = 0.6; // share of the viewport height
+  const timelines = document.querySelectorAll<HTMLElement>(".timeline");
+
+  if (
+    timelines.length &&
+    document.documentElement.classList.contains("js-motion")
+  ) {
+    let queued = false;
+
+    const update = () => {
+      queued = false;
+      const line = innerHeight * READING_LINE;
+      const atPageEnd =
+        scrollY + innerHeight >= document.documentElement.scrollHeight - 2;
+
+      timelines.forEach((tl) => {
+        const box = tl.getBoundingClientRect();
+        const progress = atPageEnd
+          ? 1
+          : Math.min(1, Math.max(0, (line - box.top) / box.height));
+        tl.style.setProperty("--tl-progress", progress.toFixed(3));
+
+        const items = [...tl.querySelectorAll<HTMLElement>(":scope > li")];
+        const reached = items.map(
+          (li) => atPageEnd || li.getBoundingClientRect().top <= line,
+        );
+        const active = reached.lastIndexOf(true);
+        items.forEach((li, i) => {
+          li.classList.toggle("is-reached", reached[i]);
+          li.classList.toggle("is-active", i === active);
+        });
+      });
+    };
+
+    const onScroll = () => {
+      if (queued) return;
+      queued = true;
+      requestAnimationFrame(update);
+    };
+
+    addEventListener("scroll", onScroll, { passive: true });
+    addEventListener("resize", onScroll, { passive: true });
+    update();
+  }
+</script>

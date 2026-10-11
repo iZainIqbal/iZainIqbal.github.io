@@ -311,10 +311,46 @@ html.js-motion .timeline.is-in::before {
   transform: scaleY(1);
 }
 html.js-motion .timeline .dot {
-  transition: transform 0.4s cubic-bezier(0.3, 1.6, 0.5, 1) 0.3s;
+  transition:
+    transform 0.4s cubic-bezier(0.3, 1.6, 0.5, 1) 0.3s,
+    background-color 0.3s ease,
+    box-shadow 0.3s ease;
 }
 html.js-motion .timeline li:not(.is-in) .dot {
   transform: scale(0);
+}
+
+/* Scroll progress: an accent line fills the rail as the page scrolls, and each
+   entry takes the accent colour once the line reaches it. --tl-progress (0 to 1)
+   and the is-reached / is-active classes are set by the script in Timeline.astro. */
+html.js-motion .timeline::after {
+  content: "";
+  position: absolute;
+  left: -0.5px;
+  top: 0.5rem;
+  bottom: 0.5rem;
+  width: 2px;
+  border-radius: 1px;
+  background: linear-gradient(
+    to bottom,
+    color-mix(in srgb, var(--accent) 30%, transparent),
+    var(--accent)
+  );
+  transform: scaleY(var(--tl-progress, 0));
+  transform-origin: top;
+  transition: transform 0.15s linear;
+}
+html.js-motion .timeline .eyebrow {
+  transition: color 0.3s ease;
+}
+html.js-motion .timeline li.is-reached .eyebrow {
+  color: var(--accent);
+}
+html.js-motion .timeline li.is-reached .dot {
+  background: var(--accent);
+}
+html.js-motion .timeline li.is-active .dot:not(.dot-current) {
+  box-shadow: 0 0 0 4px var(--accent-soft);
 }
 .timeline .dot-current {
   box-shadow: 0 0 0 0 var(--accent);
