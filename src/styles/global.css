@@ -363,3 +363,82 @@ html.js-motion .timeline .dot-current {
   70% { box-shadow: 0 0 0 10px transparent; }
   100% { box-shadow: 0 0 0 0 transparent; }
 }
+
+/* Tech stack row: scrolls sideways in a loop. Extra copies of the chips make the
+   loop seamless, and they only show while the row is moving. Hovering or
+   focusing a chip pauses it. Without motion it is a plain wrapping row. */
+.marquee-track {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.marquee-copy {
+  display: none;
+}
+html.js-motion .marquee {
+  position: relative;
+  /* Clip sideways only, so the "Used in N projects" tip above a chip still shows. */
+  overflow-x: clip;
+}
+html.js-motion .marquee::before,
+html.js-motion .marquee::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  z-index: 1;
+  width: 2rem;
+  pointer-events: none;
+}
+html.js-motion .marquee::before {
+  left: 0;
+  background: linear-gradient(to right, var(--surface), transparent);
+}
+html.js-motion .marquee::after {
+  right: 0;
+  background: linear-gradient(to left, var(--surface), transparent);
+}
+html.js-motion .marquee-track {
+  flex-wrap: nowrap;
+  gap: 0;
+  width: max-content;
+  animation: marquee 45s linear infinite;
+}
+html.js-motion .marquee-track > li {
+  display: block;
+  margin-right: 0.5rem;
+}
+html.js-motion .marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+/* Keyboard focus: stop and show every chip in a wrapping row, so the focused
+   chip is never scrolled out of view. */
+html.js-motion .marquee:focus-within .marquee-track {
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  width: auto;
+  animation: none;
+}
+html.js-motion .marquee:focus-within .marquee-track > li {
+  margin-right: 0;
+}
+html.js-motion .marquee:focus-within .marquee-copy {
+  display: none;
+}
+/* Four equal sets of chips: moving by half the track lands on an identical frame. */
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* Specialities on the home page: the picked skill is highlighted and its
+   project list fades in below. */
+.skill-link.is-selected {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+html.js-motion .skill-panel:not([hidden]) {
+  animation: fade-up 0.35s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
