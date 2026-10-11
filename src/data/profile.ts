@@ -21,11 +21,11 @@ export const education = [
 ] as const;
 
 export const certifications = [
-  "Introduction to Cloud Computing (IBM, 2024)",
-  "Introduction to DevOps (IBM, 2024)",
-  "Agile Development and Scrum (IBM, 2024)",
+  "Introduction to Cloud Computing (IBM, 2025)",
+  "Introduction to DevOps (IBM, 2025)",
+  "Introduction to Agile Development and Scrum (IBM, 2025)",
   "Python for Data Science, AI and Development (IBM, 2024)",
-  "Fundamentals of Unity Android Game Development (2023)",
+  "Fundamentals of Unity Android Game Development (Packt, 2025)",
 ] as const;
 
 export const nav = [
