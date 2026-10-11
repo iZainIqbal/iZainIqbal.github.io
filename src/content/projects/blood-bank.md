@@ -14,7 +14,8 @@ teamWork: Built with a small team during a six-month internship.
 stack: [Flutter, Firebase Auth, Firestore, FCM]
 links:
   - { label: "Demo video", url: "https://www.youtube.com/shorts/XoDwdQPJYMU", kind: video }
-cover: ../../assets/digitalizeblood.webp
+cover: ../../assets/covers/blood-bank.webp
+coverNote: Conceptual project visual.
 order: 70
 verified: false
 ---

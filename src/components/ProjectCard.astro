@@ -17,7 +17,13 @@ const p = project.data;
 const Heading = headingLevel;
 const href = `/work/${project.id}/`;
 const phoneShots = p.screens.slice(0, 3);
-const wide = variant === "feature";
+// A cover with a note is finished 16:9 artwork with its own text. It is shown
+// whole on top of the card, never cropped.
+const art = Boolean(p.cover) && Boolean(p.coverNote);
+// A feature card with artwork: the artwork spans the card, the text sits in two columns below.
+const hero = variant === "feature" && art;
+// A feature card with a screenshot or phone shots: image beside the text on desktop.
+const wide = variant === "feature" && !art && (Boolean(p.cover) || phoneShots.length > 0);
 ---
 
 <article
@@ -35,9 +41,20 @@ const wide = variant === "feature";
         <Image
           src={p.cover}
           alt=""
-          widths={wide ? [480, 800, 1200] : [480, 800]}
-          sizes={wide ? "(min-width: 1024px) 40rem, 100vw" : "(min-width: 1024px) 34rem, 100vw"}
-          class:list={["aspect-[16/9] w-full object-cover object-top", wide && "lg:aspect-auto lg:h-full lg:object-left-top"]}
+          widths={hero ? [640, 1024, 1440, 1672] : wide ? [480, 800, 1200] : [480, 800]}
+          sizes={
+            hero
+              ? "(min-width: 1152px) 70rem, 100vw"
+              : wide
+                ? "(min-width: 1024px) 40rem, 100vw"
+                : "(min-width: 1024px) 34rem, 100vw"
+          }
+          class:list={[
+            "aspect-[16/9] w-full object-cover",
+            // Artwork already is 16:9, so nothing is cut. A screenshot is cropped from the top.
+            !art && "object-top",
+            wide && "lg:aspect-auto lg:h-full lg:object-left-top",
+          ]}
         />
       </a>
     ) : (
@@ -76,6 +93,7 @@ const wide = variant === "feature";
     )
   }
   <div class="flex flex-1 flex-col gap-4 p-5 sm:p-6">
+    <div class:list={["grid gap-4", hero && "lg:grid-cols-[1fr_1.3fr] lg:gap-x-10"]}>
     <div>
       <p class="eyebrow">
         {p.org ? `${p.org} · ` : ""}{formatPeriod(p.start, p.end)}
@@ -115,6 +133,7 @@ const wide = variant === "feature";
         )
       }
     </dl>
+    </div>
 
     {
       variant === "full" ? (

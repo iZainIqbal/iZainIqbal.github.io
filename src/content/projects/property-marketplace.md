@@ -2,7 +2,6 @@
 title: Property marketplace
 summary: Tanzanian marketplace for renting and buying homes, with tools for agents and an AI assistant.
 kind: client
-org: Metaviz AI
 role: Frontend engineer (React, SEO, performance)
 start: "2026-09"
 end: present

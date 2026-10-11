@@ -2,7 +2,6 @@
 title: Field-service marketplace
 summary: Swiss platform where customers find tradespeople and tradespeople run quotes, jobs, invoices and payments.
 kind: client
-org: Metaviz AI
 role: Full-stack engineer (React web app, FastAPI backend, technical SEO)
 start: "2025-12"
 end: present
@@ -15,11 +14,18 @@ myWork:
   - Built passwordless sign-in with passkeys (Face ID / fingerprint) and email magic links.
   - 'Owned technical SEO in four languages: pre-rendering, structured data, redirects and sitemaps.'
 teamWork: Other engineers built the Flutter mobile app and the data pipeline; the product owner set requirements.
-links:
-  - { label: "Live site", url: "https://handman.ch", kind: live }
-  - { label: "Case study", url: "https://metavizai.com/case-study/service-provider-marketplace/ai-field-service-saas-trades-crm-quotes-invoices-dispatch-ai-butler", kind: case-study }
 stack: [React, TypeScript, Vite, Tailwind, FastAPI, SQLAlchemy, Alembic, Celery, PostgreSQL, Stripe, Payrexx, TWINT, WebAuthn, Playwright, GitHub Actions]
-cover: ../../assets/platform/marketplace-home.jpg
+cover: ../../assets/covers/service-marketplace.webp
+coverNote: Screens adapted for confidentiality.
+confidential: true
+client:
+  title: Service marketplace
+  category: Web platform
+  story: Connecting customers with professionals and giving businesses tools to manage quotes, jobs, invoices and payments.
+  contribution: Main contributor to the React/TypeScript web app, with backend contributions across payments, sign-in, AI integration and technical SEO.
+  tags: [React, TypeScript, FastAPI, PostgreSQL]
+  cover: ../../assets/covers/service-marketplace.webp
+  order: 1
 featured: true
 order: 1
 verified: true
@@ -34,5 +40,3 @@ verified: true
 - **AI assistant:** structured job requests, role-based entry points and voice input in the web app.
 - **SEO:** pre-rendering, structured data, four-language URLs, redirects, sitemaps.
 - **Testing:** end-to-end tests for key user journeys.
-
-![Pricing page of the platform](../../assets/platform/marketplace-pricing.jpg)

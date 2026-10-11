@@ -9,7 +9,7 @@ export const home = {
   lede: "React and FastAPI on the web, Flutter on mobile. I work on marketplaces, fitness and nutrition apps, e-commerce and on-device AI.",
   summaryTitle: "Summary",
   summary:
-    "Full-stack engineer at Metaviz AI in Lahore. I started with Flutter apps and Strapi backends for fitness, nutrition, e-commerce and wellness products. Since December 2025 I've worked mainly on a Swiss field-service marketplace: its React and TypeScript web app, FastAPI and PostgreSQL backend, payments, passwordless sign-in, AI assistant and technical SEO. Since September 2026 I've also done frontend work on travel and property marketplaces. I learn new tools quickly and use AI coding agents to explore code, draft changes, and assist with tests and debugging, then review and verify the work before integration.",
+    "Full-stack engineer at a software agency in Lahore. I started with Flutter apps and Strapi backends for fitness, nutrition, e-commerce and wellness products. Since December 2025 I've worked mainly on a Swiss field-service marketplace: its React and TypeScript web app, FastAPI and PostgreSQL backend, payments, passwordless sign-in, AI assistant and technical SEO. Since September 2026 I've also done frontend work on travel and property marketplaces. I learn new tools quickly and use AI coding agents to explore code, draft changes, and assist with tests and debugging, then review and verify the work before integration.",
   contactTitle: "Hiring for a web, backend or Flutter role?",
   contactText: "Email is the fastest way to reach me.",
 };
@@ -20,16 +20,21 @@ export const about = {
   title: "Full-stack engineer with a mobile background",
   paragraphs: [
     "I started with Flutter in 2023 and built mobile apps through an internship, university projects and my own app on Google Play.",
-    "At Metaviz AI in Lahore I built Flutter apps and Strapi backends for fitness, nutrition, e-commerce and wellness products. Since December 2025 most of my work has been on a Swiss field-service marketplace, where I moved into React, TypeScript and FastAPI and work on payments, passwordless sign-in, the AI assistant and technical SEO. Since September 2026 I've also done frontend work on travel and property marketplaces, focused on SEO and page speed. I learn new tools quickly and use AI coding agents to explore code, draft changes, and assist with tests and debugging, then review and verify the work before integration.",
+    "At a software agency in Lahore I built Flutter apps and Strapi backends for fitness, nutrition, e-commerce and wellness products. Since December 2025 most of my work has been on a Swiss field-service marketplace, where I moved into React, TypeScript and FastAPI and work on payments, passwordless sign-in, the AI assistant and technical SEO. Since September 2026 I've also done frontend work on travel and property marketplaces, focused on SEO and page speed. I learn new tools quickly and use AI coding agents to explore code, draft changes, and assist with tests and debugging, then review and verify the work before integration.",
     "Alongside client work I build my own tools, like an AI assistant that runs its models on the phone.",
   ],
 };
 
 export const hire = {
   metaDescription:
-    "Hire Zain Iqbal to build a web platform, a Flutter mobile app, a backend or an AI feature, with weekly builds you can test.",
-  title: "Need a web platform, mobile app or AI feature built?",
-  lede: "I build web apps in React, mobile apps in Flutter and the backends behind them. You get working builds every week, not just status updates.",
+    "Zain Iqbal helps businesses build and improve web and mobile applications with React, TypeScript, FastAPI and Flutter, including payments and AI integrations.",
+  title: "Have a software idea—or a product that needs fixing?",
+  lede: "I help businesses build and improve web and mobile applications. From customer-facing interfaces to APIs, payments and AI integrations, I turn requirements into working software and help existing products move forward.",
+  capabilities: "Full-stack development · React & TypeScript · FastAPI · Flutter",
+  workTitle: "Selected work",
+  workNote:
+    "Three of these were client projects I worked on as part of an agency team, and one is my own. Each card says which part I built.",
+  experienceTitle: "Experience in short",
   specialitiesTitle: "My specialities",
   services: [
     {
@@ -50,11 +55,11 @@ export const hire = {
     },
     {
       title: "AI features",
-      text: "AI assistants and chat inside your product, LLM integrations, on-device models for privacy, and AI workflows with human review.",
+      text: "AI assistants and chat inside your product, LLM integrations and on-device models.",
     },
     {
       title: "Technical SEO",
-      text: "Pre-rendering, structured data, multi-language URLs, redirects and sitemaps so your pages get found.",
+      text: "Pre-rendering, structured data, multi-language URLs, redirects and sitemaps, so search engines can read your pages.",
     },
   ],
   steps: [
@@ -70,5 +75,5 @@ export const hire = {
 
 export const cv = {
   summary:
-    "Full-stack software engineer with 2+ years of experience building production web and mobile applications. Hands-on with Flutter and Dart since 2023, and React, TypeScript, Node.js, Express, MongoDB, FastAPI and Python in production since 2025. At Metaviz AI in Lahore, I build mobile apps, web interfaces, APIs, payment flows and AI features. I learn new tools quickly and use AI coding agents to explore code, draft changes, and assist with tests and debugging, then review and verify the work before integration.",
+    "Full-stack software engineer with 2+ years of experience building production web and mobile applications. Hands-on with Flutter and Dart since 2023, and React, TypeScript, Node.js, Express, MongoDB, FastAPI and Python in production since 2025. At a software agency in Lahore, I build mobile apps, web interfaces, APIs, payment flows and AI features. I learn new tools quickly and use AI coding agents to explore code, draft changes, and assist with tests and debugging, then review and verify the work before integration.",
 };

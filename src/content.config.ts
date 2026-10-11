@@ -14,9 +14,7 @@ export const LAYERS = [
   "infra",
 ] as const;
 
-const yearMonth = z
-  .string()
-  .regex(/^\d{4}-(0[1-9]|1[0-2])$/, "use YYYY-MM");
+const yearMonth = z.string().regex(/^\d{4}-(0[1-9]|1[0-2])$/, "use YYYY-MM");
 
 const link = z.object({
   label: z.string(),
@@ -27,29 +25,64 @@ const link = z.object({
 const projects = defineCollection({
   loader: glob({ pattern: "**/*.md", base: "./src/content/projects" }),
   schema: ({ image }) =>
-    z.object({
-      title: z.string(),
-      summary: z.string().max(140),
-      kind: z.enum(["client", "personal", "course", "internship", "academic"]),
-      org: z.string().optional(),
-      role: z.string(),
-      start: yearMonth,
-      end: yearMonth.or(z.literal("present")),
-      team: z.string().optional(),
-      // Layers Zain personally wrote code in.
-      layers: z.array(z.enum(LAYERS)).min(1),
-      myWork: z.array(z.string()).min(1).max(5),
-      teamWork: z.string().optional(),
-      results: z.array(z.string()).default([]),
-      stack: z.array(z.string()),
-      links: z.array(link).default([]),
-      cover: image().optional(),
-      screens: z.array(image()).default([]),
-      featured: z.boolean().default(false),
-      order: z.number().default(100),
-      // false = claim comes from Zain's own CV and still needs owner sign-off.
-      verified: z.boolean().default(false),
-    }),
+    z
+      .object({
+        title: z.string(),
+        summary: z.string().max(140),
+        kind: z.enum([
+          "client",
+          "personal",
+          "course",
+          "internship",
+          "academic",
+        ]),
+        org: z.string().optional(),
+        role: z.string(),
+        start: yearMonth,
+        end: yearMonth.or(z.literal("present")),
+        team: z.string().optional(),
+        // Layers Zain personally wrote code in.
+        layers: z.array(z.enum(LAYERS)).min(1),
+        myWork: z.array(z.string()).min(1).max(5),
+        teamWork: z.string().optional(),
+        results: z.array(z.string()).default([]),
+        stack: z.array(z.string()),
+        links: z.array(link).default([]),
+        cover: image().optional(),
+        // Set this when the cover is finished 16:9 artwork with its own text.
+        // It says what the artwork is (for example "Conceptual project visual")
+        // and is printed under the cover on the project page.
+        coverNote: z.string().optional(),
+        screens: z.array(image()).default([]),
+        featured: z.boolean().default(false),
+        order: z.number().default(100),
+        // false = claim comes from Zain's own CV and still needs owner sign-off.
+        verified: z.boolean().default(false),
+        // true = the client's identity is withheld: no client links and no
+        // screenshot gallery. A cover, if any, needs a coverNote.
+        confidential: z.boolean().default(false),
+        // Client-facing card on /hire. Descriptive wording only, never a client's name.
+        client: z
+          .object({
+            title: z.string(),
+            category: z.string(),
+            story: z.string().max(140),
+            contribution: z.string().max(180),
+            note: z.string().optional(),
+            tags: z.array(z.string()).min(3).max(4),
+            // Optional 16:9 artwork for the card on /hire.
+            cover: image().optional(),
+            order: z.number(),
+          })
+          .optional(),
+      })
+      .refine(
+        (p) =>
+          !p.confidential || (p.links.length === 0 && p.screens.length === 0),
+        {
+          message: "a confidential project must not have links or screens",
+        },
+      ),
 });
 
 const experience = defineCollection({

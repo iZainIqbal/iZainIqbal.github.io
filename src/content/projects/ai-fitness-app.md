@@ -2,7 +2,6 @@
 title: AI fitness coaching app
 summary: Fitness app that generates personalised workout and meal plans and coaches users with AI.
 kind: client
-org: Metaviz AI
 role: Flutter developer (full mobile frontend)
 start: "2025-09"
 end: "2025-09"
@@ -12,15 +11,16 @@ myWork:
   - Built body-metrics tracking with light and dark themes.
   - Built the AI coach chat with conversation history, using Provider for state.
 teamWork: The AI models and backend were built by others.
-links:
-  - { label: "Case study", url: "https://metavizai.com/case-study/sports-fitness/ai-apex-app", kind: case-study }
 stack: [Flutter, Provider, Firebase, GPT-4o]
-screens:
-  - ../../assets/screens/fitness_home.webp
-  - ../../assets/screens/fitness_mealplan.webp
-  - ../../assets/screens/fitness_coach.webp
-  - ../../assets/screens/fitness_onboarding.webp
-  - ../../assets/screens/fitness_profile.webp
+confidential: true
+client:
+  title: Fitness coaching
+  category: Mobile app
+  story: Bringing workout plans, meal plans, progress tracking and AI coaching into one mobile experience.
+  contribution: Built the Flutter frontend, including onboarding, plans, tracking and coach chat.
+  note: The AI models and the backend were built by other engineers.
+  tags: [Flutter, Dart, Provider]
+  order: 3
 featured: true
 order: 3
 verified: true

@@ -2,7 +2,6 @@
 title: Safari travel marketplace
 summary: B2B marketplace where safari lodges, fleets, guides and travel agencies across Africa list and run their business.
 kind: client
-org: Metaviz AI
 role: Frontend engineer (React, SEO, performance)
 start: "2026-09"
 end: present

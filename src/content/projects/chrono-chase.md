@@ -13,7 +13,8 @@ teamWork: Built as a university final-year team project.
 stack: [Unity, C#]
 links:
   - { label: "Showcase post", url: "https://www.linkedin.com/posts/ali-shan-4469a521a_unity-gamedev-3d-activity-7321482456098848771-M-jd", kind: post }
-cover: ../../assets/chrono_chase.webp
+cover: ../../assets/covers/chrono-chase.webp
+coverNote: Cover artwork inspired by the project. The game menu is shown.
 order: 72
 verified: false
 ---
