@@ -7,9 +7,10 @@ start: "2026-03"
 end: "2026-03"
 layers: [mobile, ai]
 myWork:
-  - Runs AI language models fully on the phone, so chats work without an internet connection. Users pick and download a model inside the app.
-  - Remembers the user between chats. After each conversation, the app saves key facts on the phone and uses them in later chats.
-  - Optional web search and a reasoning mode that shows its thinking steps in collapsible sections.
+  - 'A personal AI assistant that runs on the phone itself. Chats work offline and stay on the device, unless the user turns on web search.'
+  - 'Users pick a model and download it inside the app, and the app runs it locally with llama.cpp.'
+  - 'Remembers the user between chats. After each conversation, the app saves key facts on the phone and uses them in later chats.'
+  - 'Optional web search and a reasoning mode that shows its thinking steps in collapsible sections.'
 stack: [Flutter, llama.cpp, Qwen2.5, SQLite, Provider, local_auth]
 cover: ../../assets/covers/mindmemo.webp
 coverNote: Adapted from the app's screens.

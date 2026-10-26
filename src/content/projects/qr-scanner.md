@@ -7,8 +7,9 @@ start: "2024-07"
 end: "2024-09"
 layers: [mobile]
 myWork:
-  - Scans QR codes live through the camera and creates new ones, which users can save to their phone's gallery.
-  - Published and maintained the app on Google Play.
+  - 'A simple Android app for scanning QR codes with the camera and making your own QR codes.'
+  - 'Scans codes live, creates new ones and saves them to the phone''s gallery.'
+  - 'Published and maintained the app on Google Play.'
 stack: [Flutter, Android MediaStore]
 links:
   - { label: "Launch post", url: "https://www.linkedin.com/posts/netsflow_appdevelopment-flutterdev-netsflow-activity-7243544883993464832-XlSh", kind: post }

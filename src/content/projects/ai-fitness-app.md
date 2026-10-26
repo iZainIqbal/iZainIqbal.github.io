@@ -7,9 +7,9 @@ start: "2025-09"
 end: "2025-09"
 layers: [mobile, ai]
 myWork:
-  - 'Built the full Flutter app frontend: onboarding, personalised workout and meal plans, and progress screens.'
-  - Added body-metrics tracking so users can follow their progress over time, with light and dark themes.
-  - Built the AI coach chat screen, where users ask questions and come back to earlier conversations.
+  - 'Users get workout and meal plans made for them, track their body metrics and progress, and can ask an AI coach for advice at any time.'
+  - 'Built the full Flutter app frontend: onboarding, the workout and meal plan screens, and progress and body-metrics tracking with light and dark themes.'
+  - 'Built the AI coach chat screen, where users ask questions and come back to earlier conversations.'
 stack: [Flutter, Provider, Firebase, GPT-4o]
 cover: ../../assets/covers/ai-fitness.webp
 coverNote: Adapted from product screens.

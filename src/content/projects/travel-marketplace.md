@@ -7,10 +7,11 @@ start: "2026-09"
 end: present
 layers: [web]
 myWork:
-  - Built the pricing page, which lays out the platform's four flat monthly plans, and the page that explains the platform to travel agencies.
-  - Reworked the national park pages, which show each park's entry fees and description, so they load much faster on phones and show up properly in search.
-  - Set up the home page and business profiles in six languages, so visitors and search engines reach the right language version.
-  - Made the whole site lighter and faster on phones, and made missing pages show a clear "page not found" message instead of an empty screen.
+  - 'Travellers describe the safari they want in their own words. The platform''s AI trip planner turns it into a plan, and vetted local agencies send tailored offers. It is free for travellers.'
+  - 'Safari lodges, fleets, guides and travel agencies list or claim their business and pay one flat monthly fee, with no commission on bookings.'
+  - 'Businesses choose from four plans (Free, Pro, Max and Enterprise), with lower prices for licensed businesses in Tanzania and Kenya.'
+  - 'National park guides show each park''s wildlife, activities and entry fees for citizens, residents and foreign visitors, so travellers can plan before they book.'
+  - 'Travellers can also browse destinations, experiences and a travel blog, in six languages.'
 links:
   - { label: "Live site", url: "https://africatravelhub.com", kind: live }
 stack: [React, Vite, i18next, JSON-LD, nginx]
@@ -20,12 +21,12 @@ order: 6
 verified: false
 ---
 
-## Pages I worked on
+## Inside the platform
 
-**Pricing page.** Lays out the four flat monthly plans. I built it so the plans are clear to visitors and to search engines.
+**Pricing.** Businesses pay one flat monthly fee instead of commission, on four plans, with lower prices for licensed businesses in Tanzania and Kenya.
 
 ![Pricing page with four flat monthly plans](../../assets/platform/travel-pricing.jpg)
 
-**Park page.** Each national park has its own page with entry fees and a description. I reworked these pages so they load quickly on phones and show up properly in search.
+**National park guides.** Each park has a guide with its wildlife, activities and entry fees, so travellers can plan before they book.
 
 ![National park page with entry fees and a description](../../assets/platform/travel-park.jpg)

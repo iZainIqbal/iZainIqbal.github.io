@@ -8,8 +8,9 @@ start: "2024-09"
 end: "2025-05"
 layers: [mobile]
 myWork:
-  - Worked on the game's menus, player profile pages and scoring.
-  - Built the in-game shop and power-up systems in Unity (C#).
+  - 'A 2.5D endless runner where the player time-travels through levels, scores points and buys power-ups in the shop to run further.'
+  - 'Worked on the game''s menus, player profile pages and scoring.'
+  - 'Built the in-game shop and power-up systems in Unity (C#).'
 stack: [Unity, C#]
 links:
   - { label: "Showcase post", url: "https://www.linkedin.com/posts/ali-shan-4469a521a_unity-gamedev-3d-activity-7321482456098848771-M-jd", kind: post }

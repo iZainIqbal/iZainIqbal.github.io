@@ -8,8 +8,9 @@ start: "2023-11"
 end: "2024-04"
 layers: [mobile]
 myWork:
-  - Worked in a small internship team to build donor matching that finds donors near the person who needs blood, with sign-in and push notifications.
-  - Added in-app messaging so donors and people requesting blood can talk directly.
+  - 'Finding blood quickly in an emergency is hard. The app connects people who need blood with registered donors nearby, in real time.'
+  - 'In a small internship team, built location-based donor matching, sign-in and push notifications that alert donors to new requests.'
+  - 'Added in-app messaging so donors and people requesting blood can arrange the donation directly.'
 stack: [Flutter, Firebase Auth, Firestore, FCM]
 links:
   - { label: "Demo video", url: "https://www.youtube.com/shorts/XoDwdQPJYMU", kind: video }

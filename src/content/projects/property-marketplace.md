@@ -7,10 +7,10 @@ start: "2026-09"
 end: present
 layers: [web]
 myWork:
-  - Built the remove-listing page, where people can ask to take down a listing that shows their property or phone number without consent.
-  - Made the site open faster by loading two heavy features only when a visitor needs them.
-  - Cleaned up which pages appear in search results, so people land on real, current home listings instead of old or empty pages.
-  - Made the legal and directory pages visible in search and kept the internal admin site out of it.
+  - 'A home-search platform for Tanzania. People look for homes to buy or rent by location, area or address, contact agents and other property professionals, and use the site in English or Swahili. It also has an AI assistant and mobile apps.'
+  - 'Agents and other property professionals have their own directory on the platform, so buyers and renters can find the right person for a home.'
+  - 'Visitors can switch the whole site between English and Swahili, and get help from the built-in AI assistant.'
+  - 'The same listings are available in Android and iOS apps.'
 links:
   - { label: "Live site", url: "https://wanyumba.com", kind: live }
   - { label: "Google Play", url: "https://play.google.com/store/apps/details?id=com.mymarketsholdings.wanyumba", kind: store }
@@ -21,9 +21,3 @@ coverNote: Adapted from product screens.
 order: 7
 verified: false
 ---
-
-## Page I built
-
-**Remove-listing page.** Owners can ask for a listing to be taken down. I built it and made sure search engines can find it.
-
-![Form to ask for a listing to be removed](../../assets/platform/property-remove-listing.jpg)

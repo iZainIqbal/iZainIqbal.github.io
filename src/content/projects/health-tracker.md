@@ -7,8 +7,9 @@ start: "2026-03"
 end: "2026-03"
 layers: [mobile]
 myWork:
-  - Built screens for workouts, a plan calendar, mood, hydration, calories and weight, so users can track their health in one app.
-  - Wrote unit and widget tests, plus developer documentation.
+  - 'A personal health app that keeps workouts, a training plan calendar, mood, water intake, calories and weight in one place, so users can see their habits over time.'
+  - 'Built all the screens and the app''s state handling with Provider.'
+  - 'Wrote unit and widget tests, plus developer documentation.'
 stack: [Flutter, Provider, flutter_test]
 cover: ../../assets/covers/health-tracker.webp
 coverNote: Conceptual project visual.

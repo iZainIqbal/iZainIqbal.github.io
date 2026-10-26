@@ -7,9 +7,9 @@ start: "2025-12"
 end: "2026-01"
 layers: [mobile]
 myWork:
-  - Built product filters so shoppers can browse by brand, category, diet and ingredient.
-  - Added delivery location handling and in-app link navigation.
-  - Redesigned the home dashboard layout.
+  - 'A grocery delivery app for Dubai built around healthy eating. Shoppers pick a diet such as Keto, Flexitarian, DASH or Low-FODMAP and get products that fit it, delivered to their area.'
+  - 'Built the product filters, so shoppers can narrow products by brand, category, diet and ingredient.'
+  - 'Added delivery location handling and in-app link navigation, and redesigned the home dashboard layout.'
 stack: [Flutter, WooCommerce REST API]
 cover: ../../assets/covers/grocery-delivery.webp
 coverNote: Adapted from product screens.

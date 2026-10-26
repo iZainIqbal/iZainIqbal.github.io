@@ -7,9 +7,9 @@ start: "2025-11"
 end: "2025-12"
 layers: [api]
 myWork:
-  - Designed the Strapi backend behind daily check-ins, app content and the in-app shop.
-  - Set up one-time-code (OTP) sign-in and the sample data used during development.
-  - Fixed the database connection settings so the backend stays stable.
+  - 'A wellness app with two kinds of users. Members follow a wellness journey with check-ins, streaks, badges and a monthly tracker. Distributors run a small business: they add products, upload content and track their orders and earnings.'
+  - 'Members can also watch wellness content and buy books, supplements and equipment in the in-app shop.'
+  - 'I built the Strapi backend: the data behind check-ins and progress, wellness content and the shop, with sign-in by one-time code (OTP).'
 stack: [Strapi, Node.js, TypeScript, PostgreSQL]
 cover: ../../assets/covers/wellness.webp
 coverNote: Product app shown. My contribution was the backend.
