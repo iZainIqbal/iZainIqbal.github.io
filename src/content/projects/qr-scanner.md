@@ -7,7 +7,7 @@ start: "2024-07"
 end: "2024-09"
 layers: [mobile]
 myWork:
-  - Built real-time QR scanning and generation, with saving to the phone's gallery.
+  - Scans QR codes live through the camera and creates new ones, which users can save to their phone's gallery.
   - Published and maintained the app on Google Play.
 stack: [Flutter, Android MediaStore]
 links:

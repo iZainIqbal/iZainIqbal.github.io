@@ -7,10 +7,9 @@ start: "2025-11"
 end: "2025-12"
 layers: [api]
 myWork:
-  - Designed the Strapi data models behind check-ins, content and the in-app shop.
-  - Added the OTP sign-in setup and seed data used during development.
-  - Fixed database connection-pool configuration.
-teamWork: I did not build the Flutter app.
+  - Designed the Strapi backend behind daily check-ins, app content and the in-app shop.
+  - Set up one-time-code (OTP) sign-in and the sample data used during development.
+  - Fixed the database connection settings so the backend stays stable.
 stack: [Strapi, Node.js, TypeScript, PostgreSQL]
 cover: ../../assets/covers/wellness.webp
 coverNote: Product app shown. My contribution was the backend.

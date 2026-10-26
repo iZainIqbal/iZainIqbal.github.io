@@ -7,14 +7,10 @@ start: "2026-09"
 end: present
 layers: [web]
 myWork:
-  - Halved the main JavaScript file (1,074 KB → 540 KB) and cut a park page from 13.1 MB to 1.6 MB, so phones download far less.
-  - 'Made the site readable to Google in six languages: the home page and 60 of 60 checked business profiles now declare their language and link every version, where before all of them looked English.'
-  - Turned 14 park pages that Google saw as blank into real pages with their own titles, and made missing pages return a proper 404 instead of an empty page.
-  - Launched the pricing and for-agencies pages, which returned 404 before, with structured data and a place in the sitemap.
-teamWork: Other engineers built most of the backend, the AI assistant and the mobile app.
-results:
-  - "Article titles too long for Google: 0 of 401 (was 11 of 20 sampled)."
-  - Measured on the live site, 16–28 Sep 2026. Page weight is from a Lighthouse test of the live park page.
+  - Built the pricing page, which lays out the platform's four flat monthly plans, and the page that explains the platform to travel agencies.
+  - Reworked the national park pages, which show each park's entry fees and description, so they load much faster on phones and show up properly in search.
+  - Set up the home page and business profiles in six languages, so visitors and search engines reach the right language version.
+  - Made the whole site lighter and faster on phones, and made missing pages show a clear "page not found" message instead of an empty screen.
 links:
   - { label: "Live site", url: "https://africatravelhub.com", kind: live }
 stack: [React, Vite, i18next, JSON-LD, nginx]
@@ -26,10 +22,10 @@ verified: false
 
 ## Pages I worked on
 
-**Pricing page.** It returned 404 before. I built it with structured data so search engines can read the plans.
+**Pricing page.** Lays out the four flat monthly plans. I built it so the plans are clear to visitors and to search engines.
 
 ![Pricing page with four flat monthly plans](../../assets/platform/travel-pricing.jpg)
 
-**Park page.** One of 14 park pages that Google used to see as blank. I also cut this page from 13.1 MB to 1.6 MB.
+**Park page.** Each national park has its own page with entry fees and a description. I reworked these pages so they load quickly on phones and show up properly in search.
 
 ![National park page with entry fees and a description](../../assets/platform/travel-park.jpg)

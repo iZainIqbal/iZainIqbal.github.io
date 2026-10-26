@@ -7,10 +7,9 @@ start: "2025-12"
 end: "2026-01"
 layers: [mobile]
 myWork:
-  - Built product filters by brand, category, diet and ingredient.
-  - Added location handling for delivery and in-app URL navigation.
-  - Reworked the dashboard layout.
-teamWork: The rest of the app, including the WooCommerce integration and payments, was built by the wider team.
+  - Built product filters so shoppers can browse by brand, category, diet and ingredient.
+  - Added delivery location handling and in-app link navigation.
+  - Redesigned the home dashboard layout.
 stack: [Flutter, WooCommerce REST API]
 cover: ../../assets/covers/grocery-delivery.webp
 coverNote: Adapted from product screens.

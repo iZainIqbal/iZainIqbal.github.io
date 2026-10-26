@@ -7,14 +7,10 @@ start: "2026-09"
 end: present
 layers: [web]
 myWork:
-  - Made the first page load 24% lighter (727 KB → 553 KB of compressed JavaScript) by loading two heavy libraries only when needed.
-  - 'Cleaned up the pages Google crawls: 36,675 → 27,924 URLs, removing 6,162 old-format listing links and 260 thin or blocked pages, so only real listings are left.'
-  - Fixed 7 legal and directory pages that told Google not to index them, and blocked the internal admin site from search results.
-  - Removed conflicting language tags from all 35,304 listing pages.
   - Built the remove-listing page, where people can ask to take down a listing that shows their property or phone number without consent.
-teamWork: Other engineers built most of the platform, the backend services, the AI assistant and the Flutter mobile app.
-results:
-  - Measured on the live site before and after release, 15–28 Sep 2026.
+  - Made the site open faster by loading two heavy features only when a visitor needs them.
+  - Cleaned up which pages appear in search results, so people land on real, current home listings instead of old or empty pages.
+  - Made the legal and directory pages visible in search and kept the internal admin site out of it.
 links:
   - { label: "Live site", url: "https://wanyumba.com", kind: live }
   - { label: "Google Play", url: "https://play.google.com/store/apps/details?id=com.mymarketsholdings.wanyumba", kind: store }

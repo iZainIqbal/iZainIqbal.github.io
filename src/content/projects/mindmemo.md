@@ -7,9 +7,9 @@ start: "2026-03"
 end: "2026-03"
 layers: [mobile, ai]
 myWork:
-  - Ran AI language models (Qwen2.5, 0.5B and 1.5B) fully on the phone with llama.cpp. Users download a model inside the app.
-  - Built long-term memory. After each chat, the app saves key facts about the user on the phone and uses them in later chats.
-  - Added optional web search and a reasoning mode with collapsible thinking steps.
+  - Runs AI language models fully on the phone, so chats work without an internet connection. Users pick and download a model inside the app.
+  - Remembers the user between chats. After each conversation, the app saves key facts on the phone and uses them in later chats.
+  - Optional web search and a reasoning mode that shows its thinking steps in collapsible sections.
 stack: [Flutter, llama.cpp, Qwen2.5, SQLite, Provider, local_auth]
 cover: ../../assets/covers/mindmemo.webp
 coverNote: Adapted from the app's screens.

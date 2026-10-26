@@ -8,12 +8,11 @@ end: present
 team: Team of 6+ engineers across web, backend and mobile
 layers: [web, api, payments, ai]
 myWork:
-  - Main contributor to the React + TypeScript web app, and a regular contributor to the FastAPI backend.
-  - 'Integrated the platform''s AI assistant into the web app: structured job requests, role-based entry points and voice input.'
-  - Built on-site payments with TWINT and tap-to-pay, plus subscription billing in the backend.
+  - 'Main contributor to the React + TypeScript web app: home page, sign-in, account, company and billing settings, and security settings.'
+  - Integrated the platform's AI assistant into the web app, so customers can describe a job by typing or by voice and send it as a clear request.
+  - Built on-site payments with TWINT and tap-to-pay, plus subscription billing for businesses.
   - Built passwordless sign-in with passkeys (Face ID / fingerprint) and email magic links.
-  - 'Owned technical SEO in four languages: pre-rendering, structured data, redirects and sitemaps.'
-teamWork: Other engineers built the Flutter mobile app and the data pipeline; the product owner set requirements.
+  - Made the site's pages in all four languages easy to find in search engines.
 stack: [React, TypeScript, Vite, Tailwind, FastAPI, SQLAlchemy, Alembic, Celery, PostgreSQL, Stripe, Payrexx, TWINT, WebAuthn, Playwright, GitHub Actions]
 cover: ../../assets/covers/service-marketplace.webp
 coverNote: Screens adapted for confidentiality.
@@ -38,5 +37,5 @@ verified: true
 - **Payments:** TWINT and tap-to-pay on-site payments; subscription billing.
 - **Sign-in:** passkeys (Face ID / fingerprint) and email magic links.
 - **AI assistant:** structured job requests, role-based entry points and voice input in the web app.
-- **SEO:** pre-rendering, structured data, four-language URLs, redirects, sitemaps.
+- **Search:** pages in all four languages set up so search engines can find and show them.
 - **Testing:** end-to-end tests for key user journeys.
